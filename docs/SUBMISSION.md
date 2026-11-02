@@ -24,7 +24,7 @@ A 1200 × 675 screenshot of the machine in its idle state with the blinking
 
 ## GitHub repository
 
-`https://github.com/[YOUR_GITHUB_USERNAME]/bugdrop-portfolio`
+`https://github.com/dsk-dev-ai/bugdrop-portfolio`
 
 ## Endpoint or live demo
 
@@ -139,7 +139,7 @@ the machine falls back to a local count, so the core interaction always works.
 ## Links
 
 - **Live site:** https://main.[YOUR_AMPLIFY_ID].amplifyapp.com
-- **Source:** https://github.com/[YOUR_GITHUB_USERNAME]/bugdrop-portfolio
+- **Source:** https://github.com/dsk-dev-ai/bugdrop-portfolio
 - **Demo video:** [OPTIONAL LINK]
 
 ---

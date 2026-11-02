@@ -5,6 +5,15 @@ This project follows [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+## [1.0.1] - 2026-11-02
+
+### Added
+- CI, release, and license badges in the README.
+
+### Fixed
+- Repository links in `index.html`, `config.js`, README, and the submission copy
+  now point at `https://github.com/dsk-dev-ai/bugdrop-portfolio`.
+
 ## [1.0.0] - 2026-11-02
 
 ### Added

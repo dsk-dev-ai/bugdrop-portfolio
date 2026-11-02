@@ -770,6 +770,10 @@ main {
 
 .reveal-actions {
   margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.8rem;
 }
 
 @keyframes pulse {
@@ -958,13 +962,6 @@ main {
   border: 1px dashed var(--border);
   border-radius: 14px;
   padding: 0.9rem 1rem;
-}
-
-.reveal-actions {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 0.8rem;
 }
 
 .copy-status {

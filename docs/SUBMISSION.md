@@ -68,8 +68,9 @@ The postmortem has five fields:
 5. **Built from it** — the project the lesson made possible
 
 Pull three times and a **secret capsule** unlocks. Every opened capsule is saved
-to a **capsule cabinet** with a progress bar, and each postmortem has a
-**shareable deep link** (`#capsule=c03`) plus a copy-link button. The feature
+to a **capsule cabinet** with a progress bar and an **unlocked profile** that maps
+the domains you have practiced, and each postmortem has a **shareable deep link**
+(`#capsule=c03`) plus a copy-link button. The feature
 never blocks navigation: it lives in its own section, the modal is dismissible
 with `Esc`, and focus returns to the lever.
 

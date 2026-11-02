@@ -78,6 +78,9 @@ test("capsule cabinet and share controls are wired into the page", () => {
     "collection-fill",
     "collection-list",
     "collection-complete",
+    "profile-title",
+    "profile-list",
+    "profile-note",
     "copy-link",
     "copy-status"
   ]) {

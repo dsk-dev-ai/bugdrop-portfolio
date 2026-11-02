@@ -27,10 +27,12 @@ project it made possible).
 4. The **third pull unlocks a secret capsule**.
 5. Opened capsules are saved to a **capsule cabinet** with a progress bar, so the
    collection can be revisited later.
-6. Every postmortem has a **shareable deep link** (`#capsule=c03`) and a copy-link
+6. An **unlocked profile** turns the collection into domain bars (Debugging, APIs,
+   Data, Deploy, Frontend, Security, Accessibility, Mindset) as capsules open.
+7. Every postmortem has a **shareable deep link** (`#capsule=c03`) and a copy-link
    button; the cabinet can open a capsule without pulling again.
-7. The lever is a real `<button>` and works with mouse, touch, keyboard, and screen readers.
-8. No camera, no permissions, no external API keys — the feature works even if the
+8. The lever is a real `<button>` and works with mouse, touch, keyboard, and screen readers.
+9. No camera, no permissions, no external API keys — the feature works even if the
    network API is down.
 
 ## Core portfolio sections
@@ -73,7 +75,7 @@ bugdrop-portfolio/
 │  ├─ DEPLOY.md               # Amplify + SAM deployment runbook
 │  ├─ PULL_REQUEST_v1.0.0.md  # release PR description
 │  └─ SUBMISSION.md           # write-up ready to paste into Builder Center
-├─ tests/                     # node:test suite (30 tests)
+├─ tests/                     # node:test suite (32 tests)
 ├─ .github/
 │  ├─ workflows/ci.yml        # GitHub Actions: tests + lint + links + Lighthouse
 │  └─ PULL_REQUEST_TEMPLATE.md
@@ -113,6 +115,7 @@ Edit **`assets/js/capsules.json`**:
       "fix": "How you fixed it.",
       "lesson": "What you now always do.",
       "project": "What it helped you build.",
+      "domain": "Debugging",
       "evidence": "commit / screenshot / link"
     }
   ],
@@ -221,8 +224,8 @@ It checks:
 - the backend mirror matches the frontend data
 - required sections, the visible hint, and the dialog live region exist in `index.html`
 - every local asset referenced by `index.html` exists
-- deep-link parsing, cabinet progress, deduplication, and capsule lookup
-  (`tests/core.test.mjs`)
+- deep-link parsing, cabinet progress, domain tallies, deduplication, and capsule
+  lookup (`tests/core.test.mjs`)
 - metadata, the raster social cover (1200×675), the manifest and its icons, the
   404 page, and the deploy runbook (`tests/site.test.mjs`)
 - `dayOfYear`, `dailyCapsule`, `routeOf`, and `reply` behave correctly (`tests/lib.test.mjs`)

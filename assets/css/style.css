@@ -1012,3 +1012,81 @@ main {
   color: var(--accent);
   font-size: 0.9rem;
 }
+
+.profile {
+  border-top: 1px solid var(--border);
+  padding-top: 0.9rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+.profile-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.profile-head h4 {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.profile-note {
+  margin: 0;
+  color: var(--text-sub);
+  font-size: 0.9rem;
+}
+
+.profile-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.5rem;
+}
+
+.profile-row {
+  display: grid;
+  grid-template-columns: minmax(95px, 0.8fr) 3fr auto;
+  align-items: center;
+  gap: 0.8rem;
+  font-size: 0.9rem;
+}
+
+.profile-label {
+  color: var(--text);
+}
+
+.profile-track {
+  height: 0.5rem;
+  border-radius: 999px;
+  background: rgba(156, 194, 232, 0.14);
+  overflow: hidden;
+}
+
+.profile-fill {
+  display: block;
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent-2), var(--accent));
+  transition: width 280ms ease;
+}
+
+.profile-count {
+  color: var(--text-sub);
+  font-size: 0.8rem;
+  text-align: right;
+}
+
+@media (max-width: 560px) {
+  .profile-row {
+    grid-template-columns: 1fr auto;
+  }
+
+  .profile-track {
+    grid-column: 1 / -1;
+    grid-row: 2;
+  }
+}

@@ -17,6 +17,7 @@ test("core helpers are exposed for the browser and the test suite", () => {
     "capsuleHref",
     "addUnique",
     "findCapsule",
+    "capsulesToMarkdown",
     "tallyDomains",
     "progress"
   ]) {
@@ -115,4 +116,29 @@ test("tallyDomains counts only unlocked capsules and sorts by count", () => {
   ]);
   assert.deepEqual(core.tallyDomains(list, []), []);
   assert.deepEqual(core.tallyDomains("nope", ["a"]), []);
+});
+
+test("capsulesToMarkdown exports a readable case file", () => {
+  const markdown = core.capsulesToMarkdown([
+    {
+      id: "c01",
+      superpower: "The 2AM Debugger",
+      domain: "Debugging",
+      bug: "Nothing happened.",
+      cause: "A typo.",
+      fix: "Logged the URL.",
+      lesson: "Prove it failed.",
+      project: "This portfolio",
+      evidence: "commit abc123"
+    }
+  ]);
+  assert.match(markdown, /^# BUG DROP — unlocked capsules/);
+  assert.match(markdown, /## The 2AM Debugger/);
+  assert.match(markdown, /\*\*Domain:\*\* Debugging/);
+  assert.match(markdown, /\*\*Incident:\*\* Nothing happened\./);
+  assert.match(markdown, /\*\*Evidence:\*\* commit abc123/);
+  assert.ok(markdown.endsWith("\n"));
+  assert.equal(core.capsulesToMarkdown([]), "");
+  assert.equal(core.capsulesToMarkdown(null), "");
+  assert.equal(core.capsulesToMarkdown([{ id: "x" }]), "");
 });

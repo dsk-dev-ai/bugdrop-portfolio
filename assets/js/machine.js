@@ -64,6 +64,8 @@
   var collectionComplete = document.getElementById("collection-complete");
   var profileList = document.getElementById("profile-list");
   var profileNote = document.getElementById("profile-note");
+  var exportButton = document.getElementById("export-cabinet");
+  var resetButton = document.getElementById("reset-cabinet");
 
   if (!machine || !lever || !reveal || !core) {
     return;
@@ -236,7 +238,66 @@
       collectionList.appendChild(item);
     });
 
+    if (exportButton) {
+      exportButton.disabled = unlocked.length === 0;
+    }
+    if (resetButton) {
+      resetButton.hidden = unlocked.length === 0 && pulls === 0;
+    }
+
     renderProfile();
+  }
+
+  function currentCapsules() {
+    return unlocked
+      .map(function (id) {
+        return core.findCapsule(data, id);
+      })
+      .filter(function (capsule) {
+        return Boolean(capsule);
+      });
+  }
+
+  function exportCabinet() {
+    var capsules = currentCapsules();
+    var markdown = core.capsulesToMarkdown(capsules);
+    if (!markdown) {
+      return;
+    }
+    var blob = new Blob([markdown], { type: "text/markdown;charset=utf-8" });
+    var url = URL.createObjectURL(blob);
+    var link = document.createElement("a");
+    link.href = url;
+    link.download = "bugdrop-capsules.md";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    window.setTimeout(function () {
+      URL.revokeObjectURL(url);
+    }, 1000);
+    announce("Exported " + capsules.length + " capsules as Markdown.");
+  }
+
+  function resetProgress() {
+    if (
+      !window.confirm(
+        "Reset local pulls, the cabinet, and the secret unlock? The AWS counter is not affected."
+      )
+    ) {
+      return;
+    }
+    unlocked = [];
+    pulls = 0;
+    secretShown = false;
+    writeList(LS_UNLOCKED, unlocked);
+    write(LS_PULLS, 0);
+    write(LS_SECRET, 0);
+    setCount(0);
+    if (!reveal.hidden) {
+      closeReveal();
+    }
+    renderCollection();
+    announce("Local progress reset.");
   }
 
   function renderProfile() {
@@ -643,6 +704,14 @@
         openById(target.getAttribute("data-capsule-id"));
       }
     });
+  }
+
+  if (exportButton) {
+    exportButton.addEventListener("click", exportCabinet);
+  }
+
+  if (resetButton) {
+    resetButton.addEventListener("click", resetProgress);
   }
 
   window.addEventListener("hashchange", function () {

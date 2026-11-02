@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-label="BUG DROP icon">
+  <defs>
+    <radialGradient id="g" cx="50%" cy="35%" r="75%">
+      <stop offset="0%" stop-color="#16324a"/>
+      <stop offset="100%" stop-color="#0b0f14"/>
+    </radialGradient>
+    <radialGradient id="capsule" cx="50%" cy="30%" r="70%">
+      <stop offset="0%" stop-color="#39ff88"/>
+      <stop offset="100%" stop-color="#4d9bff"/>
+    </radialGradient>
+  </defs>
+  <rect width="512" height="512" rx="112" fill="url(#g)"/>
+  <circle cx="256" cy="248" r="128" fill="url(#capsule)"/>
+  <circle cx="256" cy="248" r="54" fill="#0b0f14"/>
+  <rect x="146" y="404" width="220" height="26" rx="13" fill="#39ff88" opacity="0.85"/>
+</svg>

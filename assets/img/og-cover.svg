@@ -10,7 +10,7 @@
     </linearGradient>
   </defs>
   <rect width="1200" height="675" fill="url(#bg)"/>
-  <g font-family="Inter, system-ui, sans-serif">
+  <g font-family="DejaVu Sans, Inter, system-ui, sans-serif">
     <text x="90" y="250" fill="#e6edf3" font-size="76" font-weight="800" letter-spacing="2">BUG DROP</text>
     <text x="90" y="320" fill="#9fb3c8" font-size="34">the superpower vending machine</text>
     <text x="90" y="400" fill="#39ff88" font-size="26" letter-spacing="4">PULL FOR A SUPERPOWER</text>
@@ -28,6 +28,6 @@
     <circle cx="70" cy="260" r="26" fill="none" stroke="#39ff88" stroke-width="3"/>
     <circle cx="70" cy="260" r="8" fill="#39ff88"/>
     <rect x="24" y="310" width="252" height="46" rx="12" fill="#16324a" stroke="#2a3a4d" stroke-width="2"/>
-    <text x="150" y="340" text-anchor="middle" fill="#9fb3c8" font-size="14" letter-spacing="3" font-family="Inter, system-ui, sans-serif">TAKE YOUR CAPSULE</text>
+    <text x="150" y="340" text-anchor="middle" fill="#9fb3c8" font-size="14" letter-spacing="3" font-family="DejaVu Sans, Inter, system-ui, sans-serif">TAKE YOUR CAPSULE</text>
   </g>
 </svg>

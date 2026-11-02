@@ -1,0 +1,24 @@
+{
+  "name": "BUG DROP — The Superpower Vending Machine",
+  "short_name": "BUG DROP",
+  "description": "A portfolio where a retro vending machine dispenses the tech superpowers earned from real bugs.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#0b0f14",
+  "theme_color": "#0b0f14",
+  "icons": [
+    {
+      "src": "assets/img/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/img/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

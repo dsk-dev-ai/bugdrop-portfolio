@@ -151,13 +151,13 @@ always works.
 
 ## Screenshot checklist (add these files to `docs/screenshots/`)
 
-| File | What to capture |
-| --- | --- |
-| `01-hero.png` | Desktop hero with the machine and the blinking hint |
-| `02-postmortem.png` | Open postmortem card, including the lesson |
-| `03-amplify-console.png` | Amplify app page showing the live domain and a successful deploy |
-| `04-aws-backend.png` | Lambda function + DynamoDB table (and the counter item) |
-| `05-ci.png` | Green GitHub Actions run |
-| `06-mobile.png` | Phone view of the hero and a capsule reveal |
-| `07-secret.png` | The secret capsule after three pulls |
-| `08-architecture.png` | Exported architecture diagram (optional if SVG renders) |
+| File | What to capture | Status |
+| --- | --- | --- |
+| `01-hero.png` | Desktop hero with the machine and the blinking hint | Captured |
+| `02-postmortem.png` | Open postmortem card, including the lesson | Captured |
+| `03-amplify-console.png` | Amplify app page showing the live domain and a successful deploy | After deploy |
+| `04-aws-backend.png` | Lambda function + DynamoDB table (and the counter item) | After deploy |
+| `05-ci.png` | Green GitHub Actions run | Captured |
+| `06-mobile.png` | Phone view of the hero and a capsule reveal | Captured |
+| `07-secret.png` | The secret capsule after three pulls | Captured |
+| `08-architecture.png` | Architecture section from the live site | Captured |

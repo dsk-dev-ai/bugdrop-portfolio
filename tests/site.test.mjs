@@ -77,6 +77,7 @@ test("capsule cabinet and share controls are wired into the page", () => {
     "collection-bar",
     "collection-fill",
     "collection-list",
+    "collection-complete",
     "copy-link",
     "copy-status"
   ]) {
@@ -95,6 +96,25 @@ test("capsule cabinet and share controls are wired into the page", () => {
   assert.match(machine, /parseCapsuleHash/);
   assert.match(machine, /capsuleHref/);
   assert.match(machine, /navigator\.clipboard/);
+});
+
+test("AWS section documents the live architecture and links the source", () => {
+  assert.match(html, /id="aws"/);
+  assert.match(html, /src="docs\/architecture\.svg"/);
+  for (const service of [
+    "AWS Amplify Hosting",
+    "Amazon CloudFront",
+    "API Gateway",
+    "AWS Lambda",
+    "Amazon DynamoDB",
+    "CloudWatch",
+    "AWS Budgets"
+  ]) {
+    assert.match(html, new RegExp(service), "missing AWS service: " + service);
+  }
+  assert.match(html, /backend\/template\.yaml/);
+  assert.match(html, /docs\/DEPLOY\.md/);
+  assert.match(html, /href="#aws"/);
 });
 
 test("custom 404 page exists and routes back to the machine", () => {

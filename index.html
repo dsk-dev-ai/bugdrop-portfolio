@@ -38,6 +38,7 @@
         <li><a href="#about">About</a></li>
         <li><a href="#skills">Superpowers</a></li>
         <li><a href="#projects">Projects</a></li>
+        <li><a href="#aws">AWS</a></li>
         <li><a href="#machine">Machine</a></li>
         <li><a class="nav-cta" href="https://github.com/dsk-dev-ai" target="_blank" rel="noopener noreferrer" data-github>GitHub</a></li>
       </ul>
@@ -244,6 +245,63 @@
       </div>
     </section>
 
+    <section id="aws" class="section" aria-labelledby="aws-title">
+      <div class="section-head">
+        <p class="section-kicker">04 — Under the hood</p>
+        <h2 id="aws-title">Hosted on AWS. Built to degrade.</h2>
+        <p class="section-sub">
+          The portfolio is static and cheap to serve. A small serverless backend
+          adds the optional global counter — and the machine keeps working if that
+          backend disappears.
+        </p>
+      </div>
+      <figure class="aws-figure">
+        <img
+          src="docs/architecture.svg"
+          alt="Diagram: the browser loads the site from Amplify and CloudFront, with an optional API Gateway, Lambda, and DynamoDB path for the pull counter."
+          width="1100"
+          height="620"
+          loading="lazy"
+        >
+        <figcaption>
+          Static hosting on Amplify; optional API Gateway → Lambda → DynamoDB for
+          the counter. The feature never depends on the network.
+        </figcaption>
+      </figure>
+      <div class="cards">
+        <article class="card">
+          <h3>AWS Amplify Hosting</h3>
+          <p>Builds and deploys every push to <code>main</code>, serving the site over HTTPS on a public URL.</p>
+          <p class="card-tag">Hosting · Git · HTTPS</p>
+        </article>
+        <article class="card">
+          <h3>Amazon CloudFront</h3>
+          <p>Amplify's global CDN keeps the capsule JSON and assets close to the visitor.</p>
+          <p class="card-tag">CDN · caching</p>
+        </article>
+        <article class="card">
+          <h3>API Gateway + AWS Lambda</h3>
+          <p>An HTTP API routes <code>/pull</code>, <code>/stats</code>, and <code>/daily</code> to a Node.js function.</p>
+          <p class="card-tag">HTTP API · serverless</p>
+        </article>
+        <article class="card">
+          <h3>Amazon DynamoDB</h3>
+          <p>One atomic <code>ADD</code> keeps the global capsule count correct under rapid pulls.</p>
+          <p class="card-tag">NoSQL · atomic counter</p>
+        </article>
+        <article class="card">
+          <h3>Guardrails</h3>
+          <p>Least-privilege IAM from SAM, CloudWatch logs for debugging, and an AWS Budgets alarm.</p>
+          <p class="card-tag">IAM · CloudWatch · Budgets</p>
+        </article>
+      </div>
+      <p class="aws-links">
+        <a href="https://github.com/dsk-dev-ai/bugdrop-portfolio/blob/main/backend/template.yaml" target="_blank" rel="noopener noreferrer">SAM template</a>
+        <a href="https://github.com/dsk-dev-ai/bugdrop-portfolio/blob/main/docs/DEPLOY.md" target="_blank" rel="noopener noreferrer">Deploy runbook</a>
+        <a href="https://github.com/dsk-dev-ai/bugdrop-portfolio/blob/main/docs/architecture.svg" target="_blank" rel="noopener noreferrer">Architecture diagram</a>
+      </p>
+    </section>
+
     <section id="machine" class="section section-machine" aria-labelledby="machine-title">
       <div class="section-head">
         <p class="section-kicker">The creative feature</p>
@@ -275,6 +333,9 @@
           >
             <span id="collection-fill"></span>
           </div>
+          <p class="collection-complete" id="collection-complete" hidden>
+            Every capsule is open. The cabinet is complete.
+          </p>
           <ul class="collection-list" id="collection-list">
             <li class="collection-empty">
               No capsules collected yet. Pull the lever to open your first

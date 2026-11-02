@@ -61,6 +61,7 @@
   var collectionFill = document.getElementById("collection-fill");
   var copyButton = document.getElementById("copy-link");
   var copyStatus = document.getElementById("copy-status");
+  var collectionComplete = document.getElementById("collection-complete");
 
   if (!machine || !lever || !reveal || !core) {
     return;
@@ -194,6 +195,9 @@
       state.unlocked + " of " + state.total + " capsules collected"
     );
     collectionFill.style.width = state.percent + "%";
+    if (collectionComplete) {
+      collectionComplete.hidden = !(state.total > 0 && state.unlocked >= state.total);
+    }
 
     collectionList.innerHTML = "";
     entries.forEach(function (entry) {

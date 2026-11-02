@@ -38,6 +38,8 @@ project it made possible).
 - **About Me** — who I am and how I learn.
 - **Skills / Tech Superpowers** — powers framed as things earned, not just listed.
 - **Projects / Achievements** — projects with the bug stories behind them.
+- **Under the hood** — a visible AWS architecture diagram, the service map, and
+  links to the SAM template and deploy runbook.
 
 ## Project structure
 
@@ -71,7 +73,7 @@ bugdrop-portfolio/
 │  ├─ DEPLOY.md               # Amplify + SAM deployment runbook
 │  ├─ PULL_REQUEST_v1.0.0.md  # release PR description
 │  └─ SUBMISSION.md           # write-up ready to paste into Builder Center
-├─ tests/                     # node:test suite (29 tests)
+├─ tests/                     # node:test suite (30 tests)
 ├─ .github/
 │  ├─ workflows/ci.yml        # GitHub Actions: tests + lint + links + Lighthouse
 │  └─ PULL_REQUEST_TEMPLATE.md

@@ -97,8 +97,11 @@ mine.
 | **Amazon CloudWatch** | Lambda logs for debugging |
 | **AWS Budgets** | $5 cost alarm to keep the project inside the free tier |
 
-The creative feature is deliberately **resilient**: if the API is slow or offline,
-the machine falls back to a local count, so the core interaction always works.
+The live site also has an **Under the hood** section with the architecture
+diagram, the role of each service, and links to the SAM template and deploy
+runbook. The creative feature is deliberately **resilient**: if the API is slow
+or offline, the machine falls back to a local count, so the core interaction
+always works.
 
 ![AWS Amplify console after deployment](docs/screenshots/03-amplify-console.png)
 ![Lambda and DynamoDB in the AWS console](docs/screenshots/04-aws-backend.png)

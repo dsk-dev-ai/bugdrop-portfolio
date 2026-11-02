@@ -1,0 +1,27 @@
+# Dependencies
+node_modules/
+
+# Local environment and secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# AWS SAM build output
+.aws-sam/
+backend/.aws-sam/
+
+# Lighthouse CI
+.lighthouseci/
+
+# Logs and coverage
+*.log
+npm-debug.log*
+coverage/
+
+# Editors and OS
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/

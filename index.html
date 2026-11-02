@@ -168,6 +168,43 @@
           <p class="card-tag">IAM · secrets hygiene</p>
         </article>
       </div>
+
+      <figure class="radar-figure">
+        <svg class="radar" viewBox="0 0 400 360" role="img" aria-labelledby="radar-title radar-desc">
+          <title id="radar-title">Self-assessed superpower index</title>
+          <desc id="radar-desc">A six-axis radar chart: debugging 85, APIs 75, deployment 80, accessibility 70, caching 65 and secrets 72 out of 100.</desc>
+          <g class="radar-grid">
+            <polygon points="200,70 295.26,125 295.26,235 200,290 104.74,235 104.74,125" />
+            <polygon points="200,97.5 271.45,138.75 271.45,221.25 200,262.5 128.55,221.25 128.55,138.75" />
+            <polygon points="200,125 247.63,152.5 247.63,207.5 200,235 152.37,207.5 152.37,152.5" />
+            <polygon points="200,152.5 223.82,166.25 223.82,193.75 200,207.5 176.18,193.75 176.18,166.25" />
+            <line x1="200" y1="180" x2="200" y2="70" />
+            <line x1="200" y1="180" x2="295.26" y2="125" />
+            <line x1="200" y1="180" x2="295.26" y2="235" />
+            <line x1="200" y1="180" x2="200" y2="290" />
+            <line x1="200" y1="180" x2="104.74" y2="235" />
+            <line x1="200" y1="180" x2="104.74" y2="125" />
+          </g>
+          <polygon class="radar-shape" points="200,86.5 271.45,138.75 276.21,224 200,257 138.08,215.75 131.41,140.4" />
+          <g class="radar-points">
+            <circle cx="200" cy="86.5" r="4" />
+            <circle cx="271.45" cy="138.75" r="4" />
+            <circle cx="276.21" cy="224" r="4" />
+            <circle cx="200" cy="257" r="4" />
+            <circle cx="138.08" cy="215.75" r="4" />
+            <circle cx="131.41" cy="140.4" r="4" />
+          </g>
+          <g class="radar-labels">
+            <text x="200" y="38" text-anchor="middle">Debugging</text>
+            <text x="316" y="110" text-anchor="middle">APIs</text>
+            <text x="316" y="251" text-anchor="middle">Deployment</text>
+            <text x="200" y="322" text-anchor="middle">Accessibility</text>
+            <text x="84" y="251" text-anchor="middle">Caching</text>
+            <text x="84" y="110" text-anchor="middle">Secrets</text>
+          </g>
+        </svg>
+        <figcaption>Self-assessed superpower index — the shape of how I solve problems, updated as I learn.</figcaption>
+      </figure>
     </section>
 
     <section id="projects" class="section" aria-labelledby="projects-title">
@@ -211,6 +248,7 @@
         </p>
       </div>
       <div class="machine-panel">
+        <p class="daily-line">Superpower of the day: <strong id="daily-superpower">…</strong></p>
         <p class="machine-panel-note">
           <strong>How it works:</strong> the machine reads capsule stories from
           <code>assets/js/capsules.json</code>. The optional AWS counter calls

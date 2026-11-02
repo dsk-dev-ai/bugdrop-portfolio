@@ -63,6 +63,7 @@
   var busy = false;
   var lastIndex = -1;
   var lastFocus = null;
+  var dailyEl = document.getElementById("daily-superpower");
 
   function readNumber(key) {
     try {
@@ -350,5 +351,45 @@
 
   document.addEventListener("keydown", onKeydown);
 
-  loadCapsules().then(syncFromApi);
+  function localDaily() {
+    var list = data && data.capsules ? data.capsules : FALLBACK.capsules;
+    var now = new Date();
+    var start = Date.UTC(now.getUTCFullYear(), 0, 0);
+    var doy = Math.floor((now.getTime() - start) / 86400000);
+    return list[doy % list.length];
+  }
+
+  function setDaily(name) {
+    if (dailyEl) {
+      dailyEl.textContent = name || "—";
+    }
+  }
+
+  function loadDaily() {
+    setDaily(localDaily().superpower);
+    if (!config.apiBase) {
+      return;
+    }
+    window
+      .fetch(config.apiBase + "/daily", { cache: "no-store" })
+      .then(function (response) {
+        if (!response.ok) {
+          throw new Error("daily " + response.status);
+        }
+        return response.json();
+      })
+      .then(function (payload) {
+        if (payload && payload.superpower) {
+          setDaily(payload.superpower);
+        }
+      })
+      .catch(function () {
+        /* keep the deterministic local value */
+      });
+  }
+
+  loadCapsules().then(function () {
+    syncFromApi();
+    loadDaily();
+  });
 })();

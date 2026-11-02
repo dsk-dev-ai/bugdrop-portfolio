@@ -256,11 +256,39 @@
       </div>
       <div class="machine-panel">
         <p class="daily-line">Superpower of the day: <strong id="daily-superpower">…</strong></p>
+        <div class="collection" role="group" aria-labelledby="collection-title">
+          <div class="collection-head">
+            <h3 id="collection-title">Capsule cabinet</h3>
+            <p class="collection-progress">
+              <strong id="collection-count">0</strong> of
+              <span id="collection-total">13</span> collected
+            </p>
+          </div>
+          <div
+            class="collection-bar"
+            id="collection-bar"
+            role="progressbar"
+            aria-labelledby="collection-title"
+            aria-valuemin="0"
+            aria-valuemax="13"
+            aria-valuenow="0"
+          >
+            <span id="collection-fill"></span>
+          </div>
+          <ul class="collection-list" id="collection-list">
+            <li class="collection-empty">
+              No capsules collected yet. Pull the lever to open your first
+              postmortem.
+            </li>
+          </ul>
+        </div>
         <p class="machine-panel-note">
           <strong>How it works:</strong> the machine reads capsule stories from
           <code>assets/js/capsules.json</code>. The optional AWS counter calls
           <code>POST /pull</code> (API Gateway → Lambda → DynamoDB) and falls back to
-          a local count if the API is offline, so the feature never breaks.
+          a local count if the API is offline, so the feature never breaks. Every
+          capsule you open is saved to the cabinet, and every postmortem has a
+          shareable link.
         </p>
       </div>
     </section>
@@ -291,10 +319,13 @@
       </dl>
       <p class="reveal-actions">
         <button class="btn btn-primary" type="button" id="pull-again">Pull again</button>
+        <button class="btn btn-ghost" type="button" id="copy-link">Copy link</button>
+        <span class="copy-status" id="copy-status" role="status" aria-live="polite"></span>
       </p>
     </article>
   </div>
 
+  <script src="assets/js/core.js" defer></script>
   <script src="assets/js/config.js" defer></script>
   <script src="assets/js/machine.js" defer></script>
   <script src="assets/js/app.js" defer></script>

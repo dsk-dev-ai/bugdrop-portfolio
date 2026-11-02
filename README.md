@@ -25,8 +25,12 @@ project it made possible).
 3. The capsule opens an **incident postmortem** card with a real bug, its root cause,
    the fix, the lesson, and the project that came out of it.
 4. The **third pull unlocks a secret capsule**.
-5. The lever is a real `<button>` and works with mouse, touch, keyboard, and screen readers.
-6. No camera, no permissions, no external API keys — the feature works even if the
+5. Opened capsules are saved to a **capsule cabinet** with a progress bar, so the
+   collection can be revisited later.
+6. Every postmortem has a **shareable deep link** (`#capsule=c03`) and a copy-link
+   button; the cabinet can open a capsule without pulling again.
+7. The lever is a real `<button>` and works with mouse, touch, keyboard, and screen readers.
+8. No camera, no permissions, no external API keys — the feature works even if the
    network API is down.
 
 ## Core portfolio sections
@@ -45,6 +49,7 @@ bugdrop-portfolio/
 ├─ assets/
 │  ├─ css/style.css           # theme + responsive layout + animations
 │  ├─ js/config.js            # API base URL + GitHub link (edit this)
+│  ├─ js/core.js              # pure helpers: deep links, cabinet, progress
 │  ├─ js/machine.js           # vending machine + postmortem modal
 │  ├─ js/app.js               # navigation
 │  ├─ js/capsules.json        # ← your bug stories live here
@@ -66,7 +71,7 @@ bugdrop-portfolio/
 │  ├─ DEPLOY.md               # Amplify + SAM deployment runbook
 │  ├─ PULL_REQUEST_v1.0.0.md  # release PR description
 │  └─ SUBMISSION.md           # write-up ready to paste into Builder Center
-├─ tests/                     # node:test suite (22 tests)
+├─ tests/                     # node:test suite (29 tests)
 ├─ .github/
 │  ├─ workflows/ci.yml        # GitHub Actions: tests + lint + links + Lighthouse
 │  └─ PULL_REQUEST_TEMPLATE.md
@@ -214,6 +219,8 @@ It checks:
 - the backend mirror matches the frontend data
 - required sections, the visible hint, and the dialog live region exist in `index.html`
 - every local asset referenced by `index.html` exists
+- deep-link parsing, cabinet progress, deduplication, and capsule lookup
+  (`tests/core.test.mjs`)
 - metadata, the raster social cover (1200×675), the manifest and its icons, the
   404 page, and the deploy runbook (`tests/site.test.mjs`)
 - `dayOfYear`, `dailyCapsule`, `routeOf`, and `reply` behave correctly (`tests/lib.test.mjs`)

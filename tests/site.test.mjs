@@ -69,6 +69,34 @@ test("web app manifest is linked, valid, and its icons exist", () => {
   assert.match(html, /rel="apple-touch-icon" href="assets\/img\/icon-512\.png"/);
 });
 
+test("capsule cabinet and share controls are wired into the page", () => {
+  for (const id of [
+    "collection-title",
+    "collection-count",
+    "collection-total",
+    "collection-bar",
+    "collection-fill",
+    "collection-list",
+    "copy-link",
+    "copy-status"
+  ]) {
+    assert.match(html, new RegExp('id="' + id + '"'), "missing #" + id);
+  }
+  assert.match(html, /role="progressbar"/);
+  assert.match(html, /aria-valuenow="0"/);
+  assert.match(html, /id="copy-link"[^>]*>Copy link</);
+
+  const coreIdx = html.indexOf("assets/js/core.js");
+  const machineIdx = html.indexOf("assets/js/machine.js");
+  assert.ok(coreIdx !== -1 && machineIdx !== -1 && coreIdx < machineIdx);
+
+  const machine = read("assets/js/machine.js");
+  assert.match(machine, /bugdrop_unlocked/);
+  assert.match(machine, /parseCapsuleHash/);
+  assert.match(machine, /capsuleHref/);
+  assert.match(machine, /navigator\.clipboard/);
+});
+
 test("custom 404 page exists and routes back to the machine", () => {
   assert.ok(existsSync(path.join(root, "404.html")));
   const notFound = read("404.html");

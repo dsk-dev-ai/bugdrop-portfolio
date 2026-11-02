@@ -5,6 +5,7 @@ import {
   GetCommand,
   UpdateCommand
 } from "@aws-sdk/lib-dynamodb";
+import { HEADERS, dailyCapsule, reply, routeOf } from "./lib.mjs";
 
 const client = DynamoDBDocumentClient.from(new DynamoDBClient({}));
 const TABLE_NAME = process.env.TABLE_NAME;
@@ -13,32 +14,6 @@ const KEY = { pk: "GLOBAL" };
 const capsules = JSON.parse(
   readFileSync(new URL("./capsules.json", import.meta.url), "utf8")
 );
-
-const HEADERS = {
-  "content-type": "application/json",
-  "cache-control": "no-store"
-};
-
-function reply(statusCode, body) {
-  return {
-    statusCode,
-    headers: HEADERS,
-    body: JSON.stringify(body)
-  };
-}
-
-function routeOf(event) {
-  const http = event.requestContext && event.requestContext.http;
-  return {
-    method: (http && http.method) || event.httpMethod || "GET",
-    path: (http && http.path) || event.path || "/"
-  };
-}
-
-function dayOfYear(date) {
-  const start = Date.UTC(date.getUTCFullYear(), 0, 0);
-  return Math.floor((date.getTime() - start) / 86400000);
-}
 
 async function increment() {
   if (!TABLE_NAME) {
@@ -86,14 +61,7 @@ export const handler = async (event) => {
     }
 
     if (path.endsWith("/daily") && method === "GET") {
-      const now = new Date();
-      const index = dayOfYear(now) % capsules.length;
-      const capsule = capsules[index];
-      return reply(200, {
-        date: now.toISOString().slice(0, 10),
-        id: capsule.id,
-        superpower: capsule.superpower
-      });
+      return reply(200, dailyCapsule(capsules, new Date()));
     }
 
     return reply(404, { error: "not_found", path, method });

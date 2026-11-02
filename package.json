@@ -1,8 +1,8 @@
 {
   "name": "bugdrop-portfolio",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
-  "description": "BUG DROP — a portfolio where a vending machine dispenses superpowers earned from real bugs. Hosted on AWS Amplify.",
+  "description": "BUG DROP \u2014 a portfolio where a vending machine dispenses superpowers earned from real bugs. Hosted on AWS Amplify.",
   "license": "MIT",
   "scripts": {
     "serve": "http-server -p 8080 -c-1 .",
@@ -10,6 +10,7 @@
     "lint:js": "eslint assets/js",
     "lint:css": "stylelint \"assets/css/**/*.css\"",
     "lint": "npm run lint:html && npm run lint:js && npm run lint:css",
+    "test": "node --test tests/*.test.mjs",
     "links": "linkinator http://127.0.0.1:8080 --recurse --skip \"mailto:*\" --skip \"https://github.com/*\"",
     "lighthouse": "lhci autorun"
   },

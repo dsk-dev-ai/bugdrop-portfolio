@@ -9,5 +9,5 @@
  */
 window.BUGDROP_CONFIG = {
   apiBase: "",
-  github: "https://github.com/darshankachare"
+  github: "https://github.com/dsk-dev-ai"
 };

@@ -1,12 +1,16 @@
 # BUG DROP — The Superpower Vending Machine
 
+[![CI](https://github.com/dsk-dev-ai/bugdrop-portfolio/actions/workflows/ci.yml/badge.svg)](https://github.com/dsk-dev-ai/bugdrop-portfolio/actions/workflows/ci.yml)
+[![Release](https://img.shields.io/github/v/release/dsk-dev-ai/bugdrop-portfolio)](https://github.com/dsk-dev-ai/bugdrop-portfolio/releases)
+[![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
+
 A personal portfolio for the **AWS Student Builder Challenge: Build Your Tech Superpower**.
 Instead of listing skills, BUG DROP dispenses the **superpowers I earned from real bugs**:
 every capsule opens as an incident postmortem (incident → root cause → fix → lesson → the
 project it made possible).
 
 - **Live site:** _add your Amplify URL here after deploy_
-- **Repo:** `https://github.com/darshankachare/bugdrop-portfolio`
+- **Repo:** `https://github.com/dsk-dev-ai/bugdrop-portfolio`
 - **Built with:** HTML, CSS, vanilla JavaScript
 - **Hosted on:** AWS Amplify Hosting (+ optional API Gateway / Lambda / DynamoDB counter)
 
@@ -138,7 +142,7 @@ Then copy the **ApiBaseUrl** output into `assets/js/config.js`:
 ```js
 window.BUGDROP_CONFIG = {
   apiBase: "https://abc123.execute-api.us-east-1.amazonaws.com",
-  github: "https://github.com/darshankachare"
+  github: "https://github.com/dsk-dev-ai"
 };
 ```
 

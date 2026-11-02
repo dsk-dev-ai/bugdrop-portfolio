@@ -224,8 +224,8 @@
         <article class="project">
           <p class="project-kicker">Superpower · The Deployer</p>
           <h3>BUG DROP — this portfolio</h3>
-          <p>A static portfolio with a vending machine that reveals bug-to-superpower postmortems. Hosted on AWS Amplify with a serverless pull counter.</p>
-          <p class="project-stack">HTML · CSS · JavaScript · Amplify · API Gateway · Lambda · DynamoDB</p>
+          <p>A static portfolio with a vending machine that reveals bug-to-superpower postmortems. Hosted on AWS Amplify with continuous deployment from GitHub.</p>
+          <p class="project-stack">HTML · CSS · JavaScript · AWS Amplify · GitHub Actions</p>
           <a class="project-link" href="#machine">Try the machine →</a>
         </article>
         <article class="project">
@@ -250,9 +250,14 @@
         <p class="section-kicker">04 — Under the hood</p>
         <h2 id="aws-title">Hosted on AWS. Built to degrade.</h2>
         <p class="section-sub">
-          The portfolio is static and cheap to serve. A small serverless backend
-          adds the optional global counter — and the machine keeps working if that
-          backend disappears.
+          The portfolio is static and cheap to serve. A serverless counter is
+          included in the repo as an optional extension; the live site runs
+          local-first, so the machine keeps working when the API is absent.
+        </p>
+        <p class="section-sub">
+          <strong>Live now:</strong> Amplify Hosting and CloudFront. This managed
+          AWS project blocks creating the optional Lambda, API Gateway, and
+          DynamoDB resources, so the live counter uses the local fallback.
         </p>
       </div>
       <figure class="aws-figure">
@@ -280,18 +285,18 @@
           <p class="card-tag">CDN · caching</p>
         </article>
         <article class="card">
-          <h3>API Gateway + AWS Lambda</h3>
-          <p>An HTTP API routes <code>/pull</code>, <code>/stats</code>, and <code>/daily</code> to a Node.js function.</p>
-          <p class="card-tag">HTTP API · serverless</p>
+          <h3>API Gateway + AWS Lambda (optional)</h3>
+          <p>An HTTP API routes <code>/pull</code>, <code>/stats</code>, and <code>/daily</code> to a Node.js function when the backend is deployed.</p>
+          <p class="card-tag">HTTP API · serverless · in repo</p>
         </article>
         <article class="card">
-          <h3>Amazon DynamoDB</h3>
-          <p>One atomic <code>ADD</code> keeps the global capsule count correct under rapid pulls.</p>
-          <p class="card-tag">NoSQL · atomic counter</p>
+          <h3>Amazon DynamoDB (optional)</h3>
+          <p>One atomic <code>ADD</code> keeps the global capsule count correct under rapid pulls when the backend is deployed.</p>
+          <p class="card-tag">NoSQL · atomic counter · in repo</p>
         </article>
         <article class="card">
-          <h3>Guardrails</h3>
-          <p>Least-privilege IAM from SAM, CloudWatch logs for debugging, and an AWS Budgets alarm.</p>
+          <h3>Guardrails (optional backend)</h3>
+          <p>Least-privilege IAM from SAM, CloudWatch logs for debugging, and an AWS Budgets alarm for the backend.</p>
           <p class="card-tag">IAM · CloudWatch · Budgets</p>
         </article>
       </div>
@@ -362,11 +367,11 @@
         </div>
         <p class="machine-panel-note">
           <strong>How it works:</strong> the machine reads capsule stories from
-          <code>assets/js/capsules.json</code>. The optional AWS counter calls
-          <code>POST /pull</code> (API Gateway → Lambda → DynamoDB) and falls back to
-          a local count if the API is offline, so the feature never breaks. Every
-          capsule you open is saved to the cabinet, and every postmortem has a
-          shareable link.
+          <code>assets/js/capsules.json</code>. The optional AWS counter
+          (included in the repo) calls <code>POST /pull</code>
+          (API Gateway → Lambda → DynamoDB) and falls back to a local count if the
+          API is offline, so the feature never breaks. Every capsule you open is
+          saved to the cabinet, and every postmortem has a shareable link.
         </p>
       </div>
     </section>

@@ -220,3 +220,16 @@ completed. If needed, invalidate the Amplify cache by redeploying.
 
 Open the build log. The most common cause is a filename case mismatch, which CI
 (`html-validate`, ESLint, link check) catches before Amplify does.
+
+### SAM fails with `AccessDenied` / Service Control Policy
+
+Builder Center “Future Unicorn” projects use a managed Service Control Policy
+that denies CloudFormation, Lambda, API Gateway, and DynamoDB creation. SAM
+cannot deploy there, and adding an API authorizer does not help because the
+resources cannot be created at all. Submit the Amplify-only site; the counter is
+optional. Deploy the backend only from a standalone AWS account.
+
+### `sam build` fails with `Invalid package, must have name and version`
+
+`backend/src/package.json` needs `name` and `version` for SAM’s npm packager.
+Both fields are already committed in this repo; pull the latest `main`.

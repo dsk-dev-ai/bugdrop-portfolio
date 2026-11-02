@@ -11,7 +11,7 @@ Replace every `[PLACEHOLDER]` before publishing.
 
 ## Description
 
-A portfolio where a retro vending machine dispenses the tech superpowers I earned from real bugs. Pull the lever, a capsule drops, and an incident postmortem reveals the bug, the fix, and the lesson — hosted on AWS Amplify with a serverless counter.
+A portfolio where a retro vending machine dispenses the tech superpowers I earned from real bugs. Pull the lever, a capsule drops, and an incident postmortem reveals the bug, the fix, and the lesson — hosted on AWS Amplify with continuous deployment from GitHub.
 
 ## Tags (max 5)
 
@@ -92,21 +92,23 @@ mine.
 | --- | --- |
 | **AWS Amplify Hosting** | Builds and deploys the static site from GitHub, provides HTTPS and the live URL |
 | **Amazon CloudFront** | Global CDN in front of Amplify Hosting |
-| **Amazon API Gateway (HTTP API)** | Exposes `/pull`, `/stats`, and `/daily` |
-| **AWS Lambda (Node.js 24)** | Increments the counter and computes the daily superpower |
-| **Amazon DynamoDB** | `capsule_stats` table with an atomic `ADD` counter |
-| **AWS IAM** | Least-privilege role created by the SAM template |
-| **Amazon CloudWatch** | Lambda logs for debugging |
-| **AWS Budgets** | $5 cost alarm to keep the project inside the free tier |
+| **Amazon S3** | Amplify-managed storage for the deployed build artifacts and site assets |
+| **AWS IAM** | Amplify-managed service role and least-privilege access |
+| **AWS Budgets** | Cost alarm to keep the project inside the free tier |
 
 The live site also has an **Under the hood** section with the architecture
-diagram, the role of each service, and links to the SAM template and deploy
-runbook. The creative feature is deliberately **resilient**: if the API is slow
-or offline, the machine falls back to a local count, so the core interaction
-always works.
+diagram and the role of each service. The creative feature is deliberately
+**resilient**: if the API is slow or offline, the machine falls back to a local
+count, so the core interaction always works.
+
+The repo also includes an **optional serverless counter** design
+(API Gateway HTTP API → Lambda → DynamoDB) with a SAM template and tests. The
+managed AWS project for this challenge applies a Service Control Policy that
+blocks creating Lambda, API Gateway, and DynamoDB resources, so the submitted
+site runs the local-first counter. The backend remains documented, buildable
+code that can be deployed in a standalone AWS account.
 
 ![AWS Amplify console after deployment](docs/screenshots/03-amplify-console.png)
-![Lambda and DynamoDB in the AWS console](docs/screenshots/04-aws-backend.png)
 
 ## CI/CD
 
@@ -122,10 +124,12 @@ always works.
 
 - How Amplify Hosting turns a GitHub repo into a globally served HTTPS site, and
   why the CDN changes how you think about caching.
-- How to wire API Gateway → Lambda → DynamoDB with SAM, and why an atomic
+- How to model API Gateway → Lambda → DynamoDB with SAM, and why an atomic
   `ADD` is safer than read-modify-write for a shared counter.
 - How CORS and preflight requests actually work — the error that inspired one of
   the capsules.
+- How managed AWS guardrails (Service Control Policies) can block entire
+  services, and how to keep the product working with a local-first fallback.
 - How to make an interaction work for keyboard and screen-reader users, and how
   `prefers-reduced-motion` changes animation design.
 - That documentation and screenshots are part of the product, not an afterthought.
@@ -136,6 +140,10 @@ always works.
   `CorsConfiguration` for the Amplify origin and handling `OPTIONS`.
 - **The counter raced under repeated clicks.** Fixed with a DynamoDB atomic
   `ADD` instead of read-modify-write.
+- **The managed AWS project blocked backend creation.** The Service Control
+  Policy denied CloudFormation, Lambda, API Gateway, and DynamoDB, so the
+  submitted site ships the local-first counter and documents the optional
+  backend instead of pretending it is live.
 - **The reveal broke if the API was down.** Fixed with a local fallback so the
   creative feature never depends on the network.
 - **Case-sensitive file names broke a deploy.** Fixed by matching import casing
@@ -157,8 +165,8 @@ always works.
 | --- | --- | --- |
 | `01-hero.png` | Desktop hero with the machine and the blinking hint | Captured |
 | `02-postmortem.png` | Open postmortem card, including the lesson | Captured |
-| `03-amplify-console.png` | Amplify app page showing the live domain and a successful deploy | After deploy |
-| `04-aws-backend.png` | Lambda function + DynamoDB table (and the counter item) | After deploy |
+| `03-amplify-console.png` | Amplify app page showing the live domain and a successful deploy | Capture before submitting |
+| `04-aws-backend.png` | Optional backend design — not deployed in this managed project | Not needed |
 | `05-ci.png` | Green GitHub Actions run | Captured |
 | `06-mobile.png` | Phone view of the hero and a capsule reveal | Captured |
 | `07-secret.png` | The secret capsule after three pulls | Captured |

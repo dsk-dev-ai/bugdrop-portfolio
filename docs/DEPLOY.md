@@ -8,9 +8,44 @@ Hosting** (required by the hackathon) plus the optional serverless counter.
 
 ---
 
-## 0. Prerequisites
+## 0. Choose the right AWS account (free path)
 
-- [ ] AWS account (Free Tier is fine)
+**Recommended: a new AWS account on the Free plan.**
+
+- New customers get **$100 in sign-up credits plus up to $100 more** for
+  completing onboarding activities.
+- The Free plan runs for **6 months** and does **not charge** you unless you
+  upgrade to the Paid plan.
+- Amplify Hosting, Lambda, DynamoDB, API Gateway, CloudWatch, IAM, and Budgets
+  are covered by the credits or always-free limits.
+- Create the account **now**: 6 months from early November covers the judging
+  window (November 7–23, 2026) with room to spare.
+
+**If you already have an AWS account:**
+
+- Open **Billing → Free Tier** (or **Credits**) and check what is left.
+- Accounts created before **July 15, 2025** use the older 12-month Free Tier;
+  after it expires, Amplify bills a small amount. Set a Budget alarm first.
+- Do not create a second account just to get credits; AWS ties eligibility to
+  the customer.
+
+**Do not use the Builder Center “Add session” sandbox for the judged site.**
+It is a temporary environment (roughly 8 hours, auto-deleted, one per week).
+Use it only to experiment; the submitted URL must stay live through November 23.
+
+Free-account guardrails:
+
+- [ ] Choose the **Free plan** at sign-up, not the Paid plan
+- [ ] Enable MFA on the root user, then use an IAM admin user
+- [ ] Keep one Amplify app; no SSR, WAF, custom domain, EC2, or RDS
+- [ ] DynamoDB on-demand only; CloudWatch log retention 7 days
+- [ ] Create one **AWS Budgets** alarm at **$1–$5** with an email alert
+
+---
+
+## 0.1 Prerequisites
+
+- [ ] AWS account (Free plan recommended; see above)
 - [ ] MFA enabled on the AWS account
 - [ ] GitHub repo: `https://github.com/dsk-dev-ai/bugdrop-portfolio` (public)
 - [ ] AWS CLI + SAM CLI installed locally (only for the optional backend)

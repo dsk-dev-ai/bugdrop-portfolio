@@ -12,7 +12,7 @@ Parameters:
 
 Globals:
   Function:
-    Runtime: nodejs20.x
+    Runtime: nodejs24.x
     Timeout: 8
     MemorySize: 128
 

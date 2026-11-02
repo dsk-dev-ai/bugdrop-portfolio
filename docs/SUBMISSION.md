@@ -28,7 +28,7 @@ A 1200 × 675 screenshot of the machine in its idle state with the blinking
 
 ## Endpoint or live demo
 
-`https://main.[YOUR_AMPLIFY_ID].amplifyapp.com`
+`https://main.d37v5f104dujlp.amplifyapp.com`
 
 ## Jupyter / SageMaker notebook
 
@@ -93,7 +93,7 @@ mine.
 | **AWS Amplify Hosting** | Builds and deploys the static site from GitHub, provides HTTPS and the live URL |
 | **Amazon CloudFront** | Global CDN in front of Amplify Hosting |
 | **Amazon API Gateway (HTTP API)** | Exposes `/pull`, `/stats`, and `/daily` |
-| **AWS Lambda (Node.js 20)** | Increments the counter and computes the daily superpower |
+| **AWS Lambda (Node.js 24)** | Increments the counter and computes the daily superpower |
 | **Amazon DynamoDB** | `capsule_stats` table with an atomic `ADD` counter |
 | **AWS IAM** | Least-privilege role created by the SAM template |
 | **Amazon CloudWatch** | Lambda logs for debugging |
@@ -145,7 +145,7 @@ always works.
 
 ## Links
 
-- **Live site:** https://main.[YOUR_AMPLIFY_ID].amplifyapp.com
+- **Live site:** https://main.d37v5f104dujlp.amplifyapp.com
 - **Source:** https://github.com/dsk-dev-ai/bugdrop-portfolio
 - **Demo video:** [OPTIONAL LINK]
 

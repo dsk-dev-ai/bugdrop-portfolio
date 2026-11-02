@@ -3,7 +3,7 @@ frontend:
   phases:
     build:
       commands:
-        - echo "BUG DROP is a static site — no build step required."
+        - echo "BUG DROP is a static site - no build step required."
   artifacts:
     baseDirectory: /
     files:

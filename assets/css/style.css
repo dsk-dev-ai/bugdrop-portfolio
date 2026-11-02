@@ -46,6 +46,11 @@ button {
   font: inherit;
 }
 
+:where(a, button, input, textarea, select):focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
 .sr-only {
   position: absolute;
   width: 1px;
@@ -213,21 +218,56 @@ main {
 .btn {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 0.4rem;
   border-radius: 999px;
   padding: 0.7rem 1.6rem;
   border: 1px solid transparent;
+  background: transparent;
+  color: var(--text);
+  font: inherit;
   font-weight: 600;
+  text-decoration: none;
   cursor: pointer;
+  appearance: none;
+  transition:
+    background-color 160ms ease,
+    border-color 160ms ease,
+    color 160ms ease,
+    box-shadow 160ms ease,
+    transform 160ms ease;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+}
+
+.btn:active {
+  transform: translateY(0);
 }
 
 .btn-primary {
   background: linear-gradient(120deg, rgba(57, 255, 136, 0.9), rgba(77, 155, 255, 0.9));
   color: #05140d;
+  box-shadow: 0 10px 30px -18px var(--glow);
+}
+
+.btn-primary:hover,
+.btn-primary:focus-visible {
+  box-shadow: 0 14px 36px -16px var(--glow);
+  filter: brightness(1.06);
 }
 
 .btn-ghost {
+  background: rgba(156, 194, 232, 0.07);
   border-color: var(--border);
+  color: var(--text);
+}
+
+.btn-ghost:hover,
+.btn-ghost:focus-visible {
+  background: rgba(57, 255, 136, 0.12);
+  border-color: rgba(57, 255, 136, 0.6);
   color: var(--text);
 }
 

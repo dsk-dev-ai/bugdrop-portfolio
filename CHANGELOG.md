@@ -5,6 +5,28 @@ This project follows [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+## [1.1.0] - 2026-11-02
+
+### Added
+- Branded `404.html` ("capsule not found") with a route back to the machine.
+- Web app manifest (`manifest.webmanifest`), a 512×512 maskable icon, and an
+  `apple-touch-icon`.
+- Raster social cover `assets/img/og-cover.png` (1200×675), generated from the
+  editable `og-cover.svg` source.
+- `docs/DEPLOY.md`: end-to-end Amplify + SAM deployment runbook with
+  verification steps, screenshot checklist, and troubleshooting.
+- `tests/site.test.mjs`: six tests covering metadata, PNG dimensions, manifest
+  icons, the 404 page, placeholder-free config, and the deploy runbook.
+- `.nvmrc` pinning Node 20 for local/CI parity.
+
+### Changed
+- `og:image` and `twitter:image` now use the raster PNG with explicit
+  width/height/alt, plus `robots` and `theme-color` metadata.
+- HTML lint now validates `404.html` as well as `index.html`.
+
+### Fixed
+- Trimmed the meta description to 142 characters so it fits search snippets.
+
 ## [1.0.1] - 2026-11-02
 
 ### Added

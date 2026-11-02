@@ -40,13 +40,19 @@ project it made possible).
 ```text
 bugdrop-portfolio/
 ├─ index.html                 # single-page portfolio
+├─ 404.html                   # branded not-found page
+├─ manifest.webmanifest       # installable web app metadata
 ├─ assets/
 │  ├─ css/style.css           # theme + responsive layout + animations
 │  ├─ js/config.js            # API base URL + GitHub link (edit this)
 │  ├─ js/machine.js           # vending machine + postmortem modal
 │  ├─ js/app.js               # navigation
 │  ├─ js/capsules.json        # ← your bug stories live here
-│  └─ img/og-cover.svg        # social/cover image (replace with 1200x675 PNG)
+│  └─ img/
+│     ├─ og-cover.png         # 1200x675 social cover (generated)
+│     ├─ og-cover.svg         # editable source for the cover
+│     ├─ icon.svg             # vector app icon
+│     └─ icon-512.png         # maskable app icon
 ├─ backend/
 │  ├─ template.yaml           # AWS SAM: HTTP API + Lambda + DynamoDB
 │  └─ src/
@@ -57,13 +63,15 @@ bugdrop-portfolio/
 │  ├─ architecture.svg        # architecture diagram for the submission
 │  ├─ feature-flow.svg        # bug → superpower flow diagram
 │  ├─ screenshots/            # put your screenshots here
+│  ├─ DEPLOY.md               # Amplify + SAM deployment runbook
 │  ├─ PULL_REQUEST_v1.0.0.md  # release PR description
 │  └─ SUBMISSION.md           # write-up ready to paste into Builder Center
-├─ tests/                     # node:test suite (16 tests)
+├─ tests/                     # node:test suite (22 tests)
 ├─ .github/
 │  ├─ workflows/ci.yml        # GitHub Actions: tests + lint + links + Lighthouse
 │  └─ PULL_REQUEST_TEMPLATE.md
 ├─ amplify.yml                # Amplify Hosting build config
+├─ .nvmrc                     # Node 20 for local/CI parity
 ├─ package.json               # dev tooling only (not needed at runtime)
 └─ README.md
 ```
@@ -112,13 +120,16 @@ Also update:
 
 ## 3. Deploy to AWS Amplify Hosting (required)
 
+The full checklist, verification steps, and troubleshooting live in
+**[`docs/DEPLOY.md`](docs/DEPLOY.md)**.
+
 1. Push this folder to a **public** GitHub repository.
 2. AWS Console → **Amplify** → **Create new app** → **Host web app**.
 3. Connect GitHub → choose the repo and the `main` branch.
 4. Amplify reads `amplify.yml` automatically → **Save and deploy**.
 5. Copy the live URL (`https://main.xxxxxxxx.amplifyapp.com`).
-6. In Amplify → **App settings → Rewrites and redirects**, no change needed for a
-   single-page static site.
+6. Amplify serves the branded `404.html` for unknown paths; no rewrite is needed
+   for this single-page static site.
 7. Optional: **App settings → Previews** to build pull requests, and **Domain management**
    for a custom domain.
 
@@ -203,6 +214,8 @@ It checks:
 - the backend mirror matches the frontend data
 - required sections, the visible hint, and the dialog live region exist in `index.html`
 - every local asset referenced by `index.html` exists
+- metadata, the raster social cover (1200×675), the manifest and its icons, the
+  404 page, and the deploy runbook (`tests/site.test.mjs`)
 - `dayOfYear`, `dailyCapsule`, `routeOf`, and `reply` behave correctly (`tests/lib.test.mjs`)
 
 ## 7. Submitting

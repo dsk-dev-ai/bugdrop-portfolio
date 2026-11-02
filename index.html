@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>BUG DROP — Darshan Sanjay Kachare's Superpower Portfolio</title>
+  <meta name="description" content="BUG DROP is a developer portfolio where a retro vending machine dispenses the tech superpowers I earned from real bugs, fixes, and lessons. Hosted on AWS Amplify.">
+  <meta name="theme-color" content="#0b0f14">
+  <meta name="author" content="Darshan Sanjay Kachare">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="BUG DROP — Turn bugs into superpowers">
+  <meta property="og:description" content="A retro vending machine that dispenses the superpowers I earned from real bugs. Built and deployed on AWS.">
+  <meta property="og:image" content="assets/img/og-cover.svg">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230b0f14'/%3E%3Ccircle cx='32' cy='32' r='18' fill='%2339ff88'/%3E%3Ccircle cx='32' cy='32' r='8' fill='%230b0f14'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav" aria-label="Primary">
+      <a class="brand" href="#top">BUG<span>DROP</span></a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-links">
+        <span class="nav-toggle-bars" aria-hidden="true"></span>
+        <span class="sr-only">Toggle menu</span>
+      </button>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Superpowers</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#machine">Machine</a></li>
+        <li><a class="nav-cta" href="https://github.com/darshankachare" target="_blank" rel="noopener noreferrer" data-github>GitHub</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section id="top" class="hero" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <p class="eyebrow">AWS Student Builder Challenge · Tech Superpower</p>
+        <h1 id="hero-title">Hi, I'm Darshan.<br>I turn <span class="accent">bugs</span> into superpowers.</h1>
+        <p class="lede">
+          Most portfolios list what I know. BUG DROP shows how I learned it.
+          Pull the lever and a capsule drops with a real bug, the fix, and the
+          superpower it gave me.
+        </p>
+        <div class="hero-actions">
+          <button class="btn btn-primary" type="button" id="pull-cta">Pull the machine</button>
+          <a class="btn btn-ghost" href="#projects">See projects</a>
+        </div>
+        <p class="hint-line">
+          <span class="hint-dot" aria-hidden="true"></span>
+          Hint: find the blinking lever on the machine and pull it.
+        </p>
+      </div>
+
+      <div class="machine-stage">
+        <div class="machine" data-machine>
+          <div class="machine-glow" aria-hidden="true"></div>
+
+          <div class="machine-top">
+            <span class="machine-label">SUPERPOWER DISPENSER</span>
+            <span class="machine-count" id="pull-count" hidden>0 capsules pulled</span>
+          </div>
+
+          <div class="machine-window">
+            <div class="capsule-grid" aria-hidden="true">
+              <span class="capsule c1"></span><span class="capsule c2"></span>
+              <span class="capsule c3"></span><span class="capsule c4"></span>
+              <span class="capsule c5"></span><span class="capsule c6"></span>
+              <span class="capsule c7"></span><span class="capsule c8"></span>
+              <span class="capsule c9"></span><span class="capsule c10"></span>
+              <span class="capsule c11"></span><span class="capsule c12"></span>
+            </div>
+            <div class="capsule-drop" id="capsule-drop" aria-hidden="true"><span></span></div>
+          </div>
+
+          <div class="machine-controls">
+            <button id="lever" class="lever" type="button" aria-describedby="lever-hint">
+              <span class="lever-plate"></span>
+              <span class="lever-knob"></span>
+            </button>
+            <div class="lever-info">
+              <span class="hint-badge" id="lever-hint">PULL FOR A SUPERPOWER</span>
+              <span class="hint-arrow" aria-hidden="true">↑</span>
+            </div>
+          </div>
+
+          <div class="dispenser">
+            <span class="dispenser-slot" aria-hidden="true"></span>
+            <span class="dispenser-label">TAKE YOUR CAPSULE</span>
+          </div>
+
+          <p class="sr-only" id="machine-status" role="status" aria-live="polite"></p>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="section" aria-labelledby="about-title">
+      <div class="section-head">
+        <p class="section-kicker">01 — About me</p>
+        <h2 id="about-title">The builder behind the machine</h2>
+      </div>
+      <div class="about-grid">
+        <div class="about-text">
+          <p>
+            I'm <strong>Darshan Sanjay Kachare</strong>, a Computer Science student
+            who learns best by breaking things and then fixing them. I like cloud,
+            web, and automation — the moment a stack trace turns into an "oh, that's
+            why" is my favourite part of engineering.
+          </p>
+          <p>
+            BUG DROP is my portfolio with a twist: instead of a list of skills, it
+            dispenses the superpowers I actually earned from bugs. Every capsule is a
+            real incident, the fix, and the lesson I now carry into every project.
+          </p>
+          <p class="about-note">
+            Built for the <strong>AWS Student Builder Challenge: Build Your Tech
+            Superpower</strong>, deployed on AWS Amplify Hosting.
+          </p>
+        </div>
+        <ul class="about-facts">
+          <li><span>Role</span> CS student · cloud &amp; web builder</li>
+          <li><span>Focus</span> AWS, JavaScript, automation</li>
+          <li><span>Currently</span> Learning serverless + CI/CD</li>
+          <li><span>Motto</span> If it broke, it taught me something</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="skills" class="section" aria-labelledby="skills-title">
+      <div class="section-head">
+        <p class="section-kicker">02 — Tech superpowers</p>
+        <h2 id="skills-title">Powers earned the hard way</h2>
+      </div>
+      <div class="cards">
+        <article class="card">
+          <h3>The 2AM Debugger</h3>
+          <p>Reads a stack trace calmly, isolates the failing layer, and logs the happy path and the sad path.</p>
+          <p class="card-tag">JavaScript · DevTools · logging</p>
+        </article>
+        <article class="card">
+          <h3>The CORS Whisperer</h3>
+          <p>Can tell the difference between "it's broken" and "the browser is protecting me" in under a minute.</p>
+          <p class="card-tag">HTTP · API Gateway · headers</p>
+        </article>
+        <article class="card">
+          <h3>The Deployer</h3>
+          <p>Ships from a commit to a live URL, then keeps it alive long enough for people to actually see it.</p>
+          <p class="card-tag">AWS Amplify · Git · CI/CD</p>
+        </article>
+        <article class="card">
+          <h3>The Accessibility Ally</h3>
+          <p>Remembers that "works on my laptop" is not a test, and that real buttons beat clickable divs.</p>
+          <p class="card-tag">HTML · ARIA · keyboard</p>
+        </article>
+        <article class="card">
+          <h3>The Cache Breaker</h3>
+          <p>Knows when the bug is in the code and when it's an old file hiding in a CDN or a browser cache.</p>
+          <p class="card-tag">CloudFront · cache headers</p>
+        </article>
+        <article class="card">
+          <h3>The Secret Keeper</h3>
+          <p>Moves keys out of source, rotates anything exposed, and refuses to commit a .env again.</p>
+          <p class="card-tag">IAM · secrets hygiene</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="projects" class="section" aria-labelledby="projects-title">
+      <div class="section-head">
+        <p class="section-kicker">03 — Projects &amp; achievements</p>
+        <h2 id="projects-title">Things I built (and broke first)</h2>
+      </div>
+      <div class="projects">
+        <article class="project">
+          <p class="project-kicker">Superpower · The Deployer</p>
+          <h3>BUG DROP — this portfolio</h3>
+          <p>A static portfolio with a vending machine that reveals bug-to-superpower postmortems. Hosted on AWS Amplify with a serverless pull counter.</p>
+          <p class="project-stack">HTML · CSS · JavaScript · Amplify · API Gateway · Lambda · DynamoDB</p>
+          <a class="project-link" href="#machine">Try the machine →</a>
+        </article>
+        <article class="project">
+          <p class="project-kicker">Superpower · The CORS Whisperer</p>
+          <h3>Student API dashboard</h3>
+          <p>A small dashboard that pulls course data from a REST API and renders it with loading, empty, and error states that actually tell you what happened.</p>
+          <p class="project-stack">JavaScript · REST · error handling</p>
+          <span class="project-link is-muted">Learning project</span>
+        </article>
+        <article class="project">
+          <p class="project-kicker">Superpower · The Accessibility Ally</p>
+          <h3>Keyboard-first component kit</h3>
+          <p>A set of nav, modal, and form patterns rebuilt so they work with a keyboard and a screen reader, not just a mouse.</p>
+          <p class="project-stack">HTML · ARIA · CSS</p>
+          <span class="project-link is-muted">Learning project</span>
+        </article>
+      </div>
+    </section>
+
+    <section id="machine" class="section section-machine" aria-labelledby="machine-title">
+      <div class="section-head">
+        <p class="section-kicker">The creative feature</p>
+        <h2 id="machine-title">One lever. Twelve bugs. Zero regrets.</h2>
+        <p class="section-sub">
+          Every pull dispenses an incident postmortem: what broke, why, how I fixed
+          it, and the superpower it left behind. Pull three times to unlock the
+          secret capsule.
+        </p>
+      </div>
+      <div class="machine-panel">
+        <p class="machine-panel-note">
+          <strong>How it works:</strong> the machine reads capsule stories from
+          <code>assets/js/capsules.json</code>. The optional AWS counter calls
+          <code>POST /pull</code> (API Gateway → Lambda → DynamoDB) and falls back to
+          a local count if the API is offline, so the feature never breaks.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <p>BUG DROP — built by Darshan Sanjay Kachare for the AWS Student Builder Challenge.</p>
+      <p class="footer-links">
+        <a href="https://github.com/darshankachare" target="_blank" rel="noopener noreferrer" data-github>GitHub</a>
+        <a href="#top">Back to top ↑</a>
+      </p>
+    </div>
+  </footer>
+
+  <div id="reveal" class="reveal" role="dialog" aria-modal="true" aria-labelledby="reveal-title" hidden>
+    <div class="reveal-backdrop" data-close></div>
+    <article class="reveal-card">
+      <button class="reveal-close" type="button" data-close aria-label="Close postmortem">&times;</button>
+      <p class="reveal-kicker" id="reveal-kicker">INCIDENT POSTMORTEM</p>
+      <h2 id="reveal-title">Superpower</h2>
+      <dl class="reveal-fields">
+        <div><dt>Incident</dt><dd id="reveal-bug"></dd></div>
+        <div><dt>Root cause</dt><dd id="reveal-cause"></dd></div>
+        <div><dt>Fix</dt><dd id="reveal-fix"></dd></div>
+        <div><dt>Lesson</dt><dd id="reveal-lesson"></dd></div>
+        <div><dt>Built from it</dt><dd id="reveal-project"></dd></div>
+      </dl>
+      <p class="reveal-actions">
+        <button class="btn btn-primary" type="button" id="pull-again">Pull again</button>
+      </p>
+    </article>
+  </div>
+
+  <script src="assets/js/config.js" defer></script>
+  <script src="assets/js/machine.js" defer></script>
+  <script src="assets/js/app.js" defer></script>
+</body>
+</html>

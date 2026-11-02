@@ -1,0 +1,134 @@
+{
+  "capsules": [
+    {
+      "id": "c01",
+      "superpower": "The 2AM Debugger",
+      "bug": "My sign-up form silently did nothing. No error, no request, no clue.",
+      "cause": "A typo in the fetch URL meant the request never left the browser.",
+      "fix": "Logged the final URL and the response, added try/catch, and showed a real error message.",
+      "lesson": "Never trust the happy path. If a request can fail, prove that it didn't.",
+      "project": "This portfolio's counter request",
+      "evidence": "commit a1b2c3d"
+    },
+    {
+      "id": "c02",
+      "superpower": "The CORS Whisperer",
+      "bug": "The API worked in Postman but the browser blocked every call.",
+      "cause": "The API returned no Access-Control-Allow-Origin header for the site's origin.",
+      "fix": "Enabled CORS on the HTTP API and allowed only the deployed Amplify origin.",
+      "lesson": "A browser error is often the browser doing its job, not your server failing.",
+      "project": "Student API dashboard",
+      "evidence": "API Gateway CORS config"
+    },
+    {
+      "id": "c03",
+      "superpower": "The Off-By-One Slayer",
+      "bug": "Pagination skipped the newest item on every page.",
+      "cause": "I used a zero-based index against a one-based page calculation.",
+      "fix": "Wrote the formula down, added boundary tests for the first and last page.",
+      "lesson": "If the math is not obvious, write it on paper before writing it in code.",
+      "project": "Student API dashboard",
+      "evidence": "commit b7e9f21"
+    },
+    {
+      "id": "c04",
+      "superpower": "The Silent Catch",
+      "bug": "A broken config file loaded as an empty object and quietly wiped the page.",
+      "cause": "An empty catch block swallowed the JSON parse error.",
+      "fix": "Rethrew the error with context and rendered a visible fallback state.",
+      "lesson": "A swallowed error is a future outage with better hiding.",
+      "project": "Config loader for this site",
+      "evidence": "commit c44d10a"
+    },
+    {
+      "id": "c05",
+      "superpower": "The Cache Breaker",
+      "bug": "I fixed the CSS, redeployed, and nothing changed on my phone.",
+      "cause": "The old stylesheet was cached by the browser and the CDN edge.",
+      "fix": "Added a content hash to asset URLs and invalidated the distribution.",
+      "lesson": "Before debugging the code, confirm the new code actually arrived.",
+      "project": "BUG DROP deploy pipeline",
+      "evidence": "Amplify build d91f0c2"
+    },
+    {
+      "id": "c06",
+      "superpower": "The Null Nemesis",
+      "bug": "The profile page crashed only for accounts with no avatar.",
+      "cause": "I read a nested property without checking that the parent existed.",
+      "fix": "Used optional chaining plus an explicit placeholder for missing data.",
+      "lesson": "Empty, missing, and wrong are three different states. Handle all three.",
+      "project": "Student API dashboard",
+      "evidence": "commit e15aa73"
+    },
+    {
+      "id": "c07",
+      "superpower": "The Timezone Trap",
+      "bug": "The countdown hit zero at the wrong hour for everyone outside my city.",
+      "cause": "I mixed a local time string with UTC math.",
+      "fix": "Stored everything in UTC and formatted only at display time.",
+      "lesson": "Store time in UTC; convert at the edge. Always.",
+      "project": "Deadline countdown widget",
+      "evidence": "commit f0c2b88"
+    },
+    {
+      "id": "c08",
+      "superpower": "The Case-Sensitive Captain",
+      "bug": "The build failed on the server but worked perfectly on my laptop.",
+      "cause": "A file imported as Style.css while the file was named style.css.",
+      "fix": "Renamed imports to match byte-for-byte and added a build check in CI.",
+      "lesson": "Your laptop is not the server. CI is the second pair of eyes.",
+      "project": "GitHub Actions pipeline",
+      "evidence": "CI run #12"
+    },
+    {
+      "id": "c09",
+      "superpower": "The Secret Keeper",
+      "bug": "I nearly pushed an API key inside a config file.",
+      "cause": "Hardcoding felt faster than wiring an environment variable.",
+      "fix": "Rotated the key, moved it to a local env file, and added .gitignore before committing.",
+      "lesson": "The fastest key to leak is the one you typed into the source file.",
+      "project": "BUG DROP repository hygiene",
+      "evidence": ".gitignore + rotated key"
+    },
+    {
+      "id": "c10",
+      "superpower": "The Mobile Tamer",
+      "bug": "The navigation menu fell apart on a narrow phone screen.",
+      "cause": "A fixed width and a hover-only menu assumed a desktop mouse.",
+      "fix": "Made the nav a real toggle button, used wrapping flex, and tested on a device.",
+      "lesson": "Hover is not an interaction model on touch screens.",
+      "project": "BUG DROP responsive nav",
+      "evidence": "commit 0aa91fe"
+    },
+    {
+      "id": "c11",
+      "superpower": "The Cold-Start Realist",
+      "bug": "The first click after a quiet hour felt broken because nothing happened for two seconds.",
+      "cause": "Lambda cold start plus no loading state in the UI.",
+      "fix": "Added an optimistic animation and a timeout fallback, and kept the client UX independent.",
+      "lesson": "Latency is a design problem, not only an infrastructure problem.",
+      "project": "BUG DROP serverless counter",
+      "evidence": "CloudWatch logs"
+    },
+    {
+      "id": "c12",
+      "superpower": "The Accessibility Ally",
+      "bug": "A clickable div worked with a mouse but could not be reached by keyboard.",
+      "cause": "I styled a div to look like a button instead of using a button.",
+      "fix": "Replaced it with a real button, added visible focus, and announced results with aria-live.",
+      "lesson": "Semantic HTML is the cheapest accessibility feature you will ever ship.",
+      "project": "BUG DROP machine lever",
+      "evidence": "commit 7ac31b0"
+    }
+  ],
+  "secret": {
+    "id": "secret",
+    "superpower": "The Unlocker",
+    "bug": "I almost quit the first time a deploy failed three times in a row.",
+    "cause": "I was treating every failure as proof I could not do it.",
+    "fix": "I wrote down what each attempt taught me, fixed one thing at a time, and shipped.",
+    "lesson": "Persistence is a technical skill. The third pull is where the good stuff drops.",
+    "project": "This portfolio you are reading",
+    "evidence": "You found the secret capsule"
+  }
+}

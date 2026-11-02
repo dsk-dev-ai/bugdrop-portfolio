@@ -1,0 +1,85 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Transform: AWS::Serverless-2016-10-31
+Description: BUG DROP serverless counter — API Gateway HTTP API + Lambda + DynamoDB.
+
+Parameters:
+  AllowedOrigin:
+    Type: String
+    Default: "*"
+    Description: >
+      The origin allowed to call the API. After the first Amplify deploy,
+      set this to your site URL (for example https://main.abc123.amplifyapp.com).
+
+Globals:
+  Function:
+    Runtime: nodejs20.x
+    Timeout: 8
+    MemorySize: 128
+
+Resources:
+  BugDropApi:
+    Type: AWS::Serverless::HttpApi
+    Properties:
+      CorsConfiguration:
+        AllowOrigins:
+          - !Ref AllowedOrigin
+        AllowMethods:
+          - GET
+          - POST
+          - OPTIONS
+        AllowHeaders:
+          - Content-Type
+
+  CapsuleStats:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: bugdrop-capsule-stats
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - AttributeName: pk
+          AttributeType: S
+      KeySchema:
+        - AttributeName: pk
+          KeyType: HASH
+      PointInTimeRecoverySpecification:
+        PointInTimeRecoveryEnabled: false
+
+  BugDropFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: src/
+      Handler: handler.handler
+      Description: Increments and reports the global capsules-pulled counter.
+      Environment:
+        Variables:
+          TABLE_NAME: !Ref CapsuleStats
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: !Ref CapsuleStats
+      Events:
+        Pull:
+          Type: HttpApi
+          Properties:
+            ApiId: !Ref BugDropApi
+            Path: /pull
+            Method: POST
+        Stats:
+          Type: HttpApi
+          Properties:
+            ApiId: !Ref BugDropApi
+            Path: /stats
+            Method: GET
+        Daily:
+          Type: HttpApi
+          Properties:
+            ApiId: !Ref BugDropApi
+            Path: /daily
+            Method: GET
+
+Outputs:
+  ApiBaseUrl:
+    Description: Paste this into assets/js/config.js as apiBase.
+    Value: !Sub "https://${BugDropApi}.execute-api.${AWS::Region}.amazonaws.com"
+  TableName:
+    Description: DynamoDB table holding the capsule counter.
+    Value: !Ref CapsuleStats

@@ -1,0 +1,14 @@
+[
+  { "id": "c01", "superpower": "The 2AM Debugger" },
+  { "id": "c02", "superpower": "The CORS Whisperer" },
+  { "id": "c03", "superpower": "The Off-By-One Slayer" },
+  { "id": "c04", "superpower": "The Silent Catch" },
+  { "id": "c05", "superpower": "The Cache Breaker" },
+  { "id": "c06", "superpower": "The Null Nemesis" },
+  { "id": "c07", "superpower": "The Timezone Trap" },
+  { "id": "c08", "superpower": "The Case-Sensitive Captain" },
+  { "id": "c09", "superpower": "The Secret Keeper" },
+  { "id": "c10", "superpower": "The Mobile Tamer" },
+  { "id": "c11", "superpower": "The Cold-Start Realist" },
+  { "id": "c12", "superpower": "The Accessibility Ally" }
+]

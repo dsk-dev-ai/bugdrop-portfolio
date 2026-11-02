@@ -67,9 +67,11 @@ The postmortem has five fields:
 4. **Lesson** — what I now do differently
 5. **Built from it** — the project the lesson made possible
 
-Pull three times and a **secret capsule** unlocks. The feature never blocks
-navigation: it lives in its own section, the modal is dismissible with `Esc`, and
-focus returns to the lever.
+Pull three times and a **secret capsule** unlocks. Every opened capsule is saved
+to a **capsule cabinet** with a progress bar, and each postmortem has a
+**shareable deep link** (`#capsule=c03`) plus a copy-link button. The feature
+never blocks navigation: it lives in its own section, the modal is dismissible
+with `Esc`, and focus returns to the lever.
 
 ![The postmortem card after a pull](docs/screenshots/02-postmortem.png)
 
@@ -106,8 +108,8 @@ the machine falls back to a local count, so the core interaction always works.
 - **Amplify continuous deployment:** every push to `main` builds and deploys.
 - **GitHub Actions:** a Node test suite, HTML validation, ESLint, Stylelint,
   broken-link check, and Lighthouse CI on every push and pull request.
-- **Release flow:** work lands on `release/v1.0.0`, is tested, then merged to
-  `main` with a reviewed pull request and a tagged release (`v0.1.0`, `v1.0.0`).
+- **Release flow:** work lands on a `release/*` branch, is tested, then merged to
+  `main` with a reviewed pull request and a tagged release.
 
 ![GitHub Actions CI passing](docs/screenshots/05-ci.png)
 

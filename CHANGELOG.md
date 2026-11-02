@@ -5,6 +5,27 @@ This project follows [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+## [1.2.0] - 2026-11-02
+
+### Added
+- **Capsule cabinet** in the creative-feature panel: unlocked capsules are saved
+  to `localStorage` (`bugdrop_unlocked`) and can be reopened without pulling.
+- Collection progress bar with an accessible `progressbar`, live count, and
+  locked/unlocked states.
+- **Shareable postmortems**: every capsule updates the URL to
+  `#capsule=<id>`, and the reveal card has a copy-link button with a clipboard
+  fallback and status message.
+- Deep links open the matching capsule on load and stay in sync with browser
+  back/forward navigation.
+- `assets/js/core.js` with pure, tested helpers (`parseCapsuleHash`,
+  `capsuleHref`, `addUnique`, `findCapsule`, `progress`).
+- `tests/core.test.mjs` (6 tests) plus a site-contract test; suite is now
+  **29 tests**.
+
+### Changed
+- README and submission copy document the cabinet and deep-link sharing.
+- Version bumped to `1.2.0`.
+
 ## [1.1.0] - 2026-11-02
 
 ### Added

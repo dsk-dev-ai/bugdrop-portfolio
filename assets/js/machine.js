@@ -41,10 +41,12 @@
     }
   };
 
+  var core = window.BugDropCore;
   var config = window.BUGDROP_CONFIG || {};
   var redact = window.matchMedia("(prefers-reduced-motion: reduce)");
   var LS_PULLS = "bugdrop_pulls";
   var LS_SECRET = "bugdrop_secret";
+  var LS_UNLOCKED = "bugdrop_unlocked";
 
   var machine = document.querySelector("[data-machine]");
   var lever = document.getElementById("lever");
@@ -52,17 +54,27 @@
   var counterEl = document.getElementById("pull-count");
   var statusEl = document.getElementById("machine-status");
   var reveal = document.getElementById("reveal");
+  var collectionList = document.getElementById("collection-list");
+  var collectionCount = document.getElementById("collection-count");
+  var collectionTotal = document.getElementById("collection-total");
+  var collectionBar = document.getElementById("collection-bar");
+  var collectionFill = document.getElementById("collection-fill");
+  var copyButton = document.getElementById("copy-link");
+  var copyStatus = document.getElementById("copy-status");
 
-  if (!machine || !lever || !reveal) {
+  if (!machine || !lever || !reveal || !core) {
     return;
   }
 
   var data = FALLBACK;
   var pulls = readNumber(LS_PULLS);
   var secretShown = readFlag(LS_SECRET);
+  var unlocked = readList(LS_UNLOCKED);
   var busy = false;
   var lastIndex = -1;
   var lastFocus = null;
+  var activeCapsuleId = null;
+  var copyTimer = 0;
   var dailyEl = document.getElementById("daily-superpower");
 
   function readNumber(key) {
@@ -81,12 +93,30 @@
     }
   }
 
+  function readList(key) {
+    try {
+      var raw = window.localStorage.getItem(key);
+      var parsed = raw ? JSON.parse(raw) : [];
+      return Array.isArray(parsed)
+        ? parsed.filter(function (value) {
+            return typeof value === "string" && value !== "";
+          })
+        : [];
+    } catch (err) {
+      return [];
+    }
+  }
+
   function write(key, value) {
     try {
       window.localStorage.setItem(key, String(value));
     } catch (err) {
       /* storage can be unavailable in private mode; ignore */
     }
+  }
+
+  function writeList(key, value) {
+    write(key, JSON.stringify(value));
   }
 
   function wait(ms) {
@@ -115,6 +145,141 @@
     }
     counterEl.hidden = false;
     counterEl.textContent = count + (count === 1 ? " capsule pulled" : " capsules pulled");
+  }
+
+  function pad2(value) {
+    return value < 10 ? "0" + value : String(value);
+  }
+
+  function collectionEntries() {
+    var list = Array.isArray(data.capsules) ? data.capsules : [];
+    var entries = list.map(function (capsule, index) {
+      return {
+        id: capsule.id,
+        name: capsule.superpower,
+        label: "Capsule " + pad2(index + 1),
+        secret: false
+      };
+    });
+    if (data.secret && data.secret.id) {
+      entries.push({
+        id: data.secret.id,
+        name: data.secret.superpower,
+        label: "Secret capsule",
+        secret: true
+      });
+    }
+    return entries;
+  }
+
+  function renderCollection() {
+    if (
+      !collectionList ||
+      !collectionCount ||
+      !collectionTotal ||
+      !collectionBar ||
+      !collectionFill
+    ) {
+      return;
+    }
+
+    var entries = collectionEntries();
+    var state = core.progress(unlocked, entries.length);
+    collectionCount.textContent = String(state.unlocked);
+    collectionTotal.textContent = String(state.total);
+    collectionBar.setAttribute("aria-valuemax", String(state.total));
+    collectionBar.setAttribute("aria-valuenow", String(state.unlocked));
+    collectionBar.setAttribute(
+      "aria-valuetext",
+      state.unlocked + " of " + state.total + " capsules collected"
+    );
+    collectionFill.style.width = state.percent + "%";
+
+    collectionList.innerHTML = "";
+    entries.forEach(function (entry) {
+      var item = document.createElement("li");
+      var open = unlocked.indexOf(entry.id) !== -1;
+      var node;
+
+      if (open) {
+        node = document.createElement("button");
+        node.type = "button";
+        node.className = "collection-item is-unlocked";
+        node.setAttribute("data-capsule-id", entry.id);
+      } else {
+        node = document.createElement("div");
+        node.className = "collection-item is-locked";
+      }
+
+      var name = document.createElement("strong");
+      name.textContent = open
+        ? entry.name
+        : entry.secret
+          ? "Secret capsule"
+          : entry.label;
+      var meta = document.createElement("span");
+      meta.textContent = open
+        ? entry.label + " · open postmortem"
+        : entry.secret
+          ? "Locked · pull three times"
+          : "Locked · pull the lever";
+
+      node.appendChild(name);
+      node.appendChild(meta);
+      item.appendChild(node);
+      collectionList.appendChild(item);
+    });
+  }
+
+  function unlockCapsule(id) {
+    var next = core.addUnique(unlocked, id);
+    if (next.length !== unlocked.length) {
+      unlocked = next;
+      writeList(LS_UNLOCKED, unlocked);
+    }
+    renderCollection();
+  }
+
+  function openById(id) {
+    var capsule = core.findCapsule(data, id);
+    if (!capsule) {
+      return false;
+    }
+    openReveal({
+      capsule: capsule,
+      isSecret: Boolean(data.secret && capsule.id === data.secret.id)
+    });
+    return true;
+  }
+
+  function setCapsuleHash(id) {
+    try {
+      var next = core.capsuleHref(window.location.href, id);
+      if (next && window.history && window.history.replaceState) {
+        window.history.replaceState(null, "", next);
+      }
+    } catch (err) {
+      /* history can be restricted in embedded views; ignore */
+    }
+  }
+
+  function clearCapsuleHash() {
+    try {
+      if (window.history && window.history.replaceState) {
+        window.history.replaceState(
+          null,
+          "",
+          window.location.pathname + window.location.search
+        );
+      }
+    } catch (err) {
+      /* ignore */
+    }
+  }
+
+  function openFromHash() {
+    var id = core.parseCapsuleHash(window.location.hash);
+    return id ? openById(id) : false;
   }
 
   function loadCapsules() {
@@ -219,6 +384,12 @@
   function openReveal(result) {
     lastFocus = document.activeElement;
     var capsule = result.capsule;
+    activeCapsuleId = capsule.id;
+    unlockCapsule(capsule.id);
+    setCapsuleHash(capsule.id);
+    if (copyStatus) {
+      copyStatus.textContent = "";
+    }
 
     fill("reveal-title", capsule.superpower);
     fill("reveal-bug", capsule.bug);
@@ -244,9 +415,70 @@
 
   function closeReveal() {
     reveal.hidden = true;
+    activeCapsuleId = null;
     document.body.style.overflow = "";
+    clearCapsuleHash();
     if (lastFocus && typeof lastFocus.focus === "function") {
       lastFocus.focus();
+    }
+  }
+
+  function fallbackCopy(text) {
+    try {
+      var field = document.createElement("textarea");
+      field.value = text;
+      field.setAttribute("readonly", "");
+      field.style.position = "fixed";
+      field.style.opacity = "0";
+      document.body.appendChild(field);
+      field.select();
+      var copied = document.execCommand("copy");
+      document.body.removeChild(field);
+      return copied;
+    } catch (err) {
+      return false;
+    }
+  }
+
+  function setCopyStatus(message) {
+    if (!copyStatus) {
+      return;
+    }
+    copyStatus.textContent = message;
+    if (copyTimer) {
+      window.clearTimeout(copyTimer);
+    }
+    copyTimer = window.setTimeout(function () {
+      copyStatus.textContent = "";
+    }, 3200);
+  }
+
+  function copyActiveLink() {
+    if (!activeCapsuleId) {
+      return;
+    }
+    var url = core.capsuleHref(window.location.href, activeCapsuleId);
+
+    function done(copied) {
+      if (copied) {
+        setCopyStatus("Link copied — share this capsule");
+        announce("Link copied to clipboard");
+      } else {
+        setCopyStatus("Copy failed — use the address bar");
+      }
+    }
+
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(url).then(
+        function () {
+          done(true);
+        },
+        function () {
+          done(fallbackCopy(url));
+        }
+      );
+    } else {
+      done(fallbackCopy(url));
     }
   }
 
@@ -343,6 +575,30 @@
     });
   }
 
+  if (copyButton) {
+    copyButton.addEventListener("click", copyActiveLink);
+  }
+
+  if (collectionList) {
+    collectionList.addEventListener("click", function (event) {
+      var target = event.target.closest("[data-capsule-id]");
+      if (target) {
+        openById(target.getAttribute("data-capsule-id"));
+      }
+    });
+  }
+
+  window.addEventListener("hashchange", function () {
+    var id = core.parseCapsuleHash(window.location.hash);
+    if (id) {
+      openById(id);
+      return;
+    }
+    if (!reveal.hidden) {
+      closeReveal();
+    }
+  });
+
   reveal.addEventListener("click", function (event) {
     if (event.target.hasAttribute("data-close")) {
       closeReveal();
@@ -389,6 +645,8 @@
   }
 
   loadCapsules().then(function () {
+    renderCollection();
+    openFromHash();
     syncFromApi();
     loadDaily();
   });

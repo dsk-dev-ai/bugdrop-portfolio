@@ -16,7 +16,8 @@ const REQUIRED_FIELDS = [
   "cause",
   "fix",
   "lesson",
-  "project"
+  "project",
+  "domain"
 ];
 
 test("capsules dataset is well formed", () => {
@@ -51,6 +52,26 @@ test("secret capsule is complete", () => {
       typeof data.secret[field],
       "string",
       "secret capsule is missing " + field
+    );
+  }
+});
+
+test("capsule domains come from the documented set", () => {
+  const allowed = new Set([
+    "Debugging",
+    "APIs",
+    "Data",
+    "Deploy",
+    "Frontend",
+    "Security",
+    "Accessibility",
+    "Mindset"
+  ]);
+  const all = data.capsules.concat(data.secret);
+  for (const capsule of all) {
+    assert.ok(
+      allowed.has(capsule.domain),
+      capsule.id + " has an unknown domain: " + capsule.domain
     );
   }
 });

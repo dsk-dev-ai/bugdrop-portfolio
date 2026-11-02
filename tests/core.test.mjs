@@ -17,6 +17,7 @@ test("core helpers are exposed for the browser and the test suite", () => {
     "capsuleHref",
     "addUnique",
     "findCapsule",
+    "tallyDomains",
     "progress"
   ]) {
     assert.equal(typeof core[name], "function", name + " is missing");
@@ -96,4 +97,22 @@ test("progress clamps and reports whole percentages", () => {
     total: 4,
     percent: 0
   });
+});
+
+test("tallyDomains counts only unlocked capsules and sorts by count", () => {
+  const list = [
+    { id: "a", domain: "APIs" },
+    { id: "b", domain: "APIs" },
+    { id: "c", domain: "Data" },
+    { id: "d" }
+  ];
+  assert.deepEqual(core.tallyDomains(list, ["a", "b"]), [
+    { domain: "APIs", count: 2 }
+  ]);
+  assert.deepEqual(core.tallyDomains(list, ["a", "c", "d"]), [
+    { domain: "APIs", count: 1 },
+    { domain: "Data", count: 1 }
+  ]);
+  assert.deepEqual(core.tallyDomains(list, []), []);
+  assert.deepEqual(core.tallyDomains("nope", ["a"]), []);
 });

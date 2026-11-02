@@ -5,6 +5,20 @@ This project follows [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+## [1.4.0] - 2026-11-02
+
+### Added
+- **Unlocked profile**: each capsule now carries a `domain`, and the cabinet turns
+  the collection into live domain bars (Debugging, APIs, Data, Deploy, Frontend,
+  Security, Accessibility, Mindset).
+- `tallyDomains` pure helper in `assets/js/core.js`, with tests for filtering,
+  counting, and ordering.
+- Domain validation test for the capsule dataset and secret capsule.
+
+### Changed
+- README and submission copy document the unlocked profile.
+- Test suite is now **32 tests**; version bumped to `1.4.0`.
+
 ## [1.3.0] - 2026-11-02
 
 ### Added

@@ -57,6 +57,30 @@
     return null;
   }
 
+  function tallyDomains(capsules, unlocked) {
+    var ids = Array.isArray(unlocked) ? unlocked : [];
+    var counts = {};
+    var list = Array.isArray(capsules) ? capsules : [];
+
+    list.forEach(function (capsule) {
+      if (!capsule || typeof capsule.domain !== "string" || capsule.domain === "") {
+        return;
+      }
+      if (ids.indexOf(capsule.id) === -1) {
+        return;
+      }
+      counts[capsule.domain] = (counts[capsule.domain] || 0) + 1;
+    });
+
+    return Object.keys(counts)
+      .map(function (domain) {
+        return { domain: domain, count: counts[domain] };
+      })
+      .sort(function (a, b) {
+        return b.count - a.count || a.domain.localeCompare(b.domain);
+      });
+  }
+
   function progress(unlocked, total) {
     var seen = Array.isArray(unlocked) ? new Set(unlocked).size : 0;
     var max = Math.max(0, Number(total) || 0);
@@ -73,6 +97,7 @@
     capsuleHref: capsuleHref,
     addUnique: addUnique,
     findCapsule: findCapsule,
+    tallyDomains: tallyDomains,
     progress: progress
   };
 })(typeof window !== "undefined" ? window : globalThis);

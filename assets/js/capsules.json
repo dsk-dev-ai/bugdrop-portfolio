@@ -8,7 +8,8 @@
       "fix": "Logged the final URL and the response, added try/catch, and showed a real error message.",
       "lesson": "Never trust the happy path. If a request can fail, prove that it didn't.",
       "project": "This portfolio's counter request",
-      "evidence": "commit a1b2c3d"
+      "evidence": "commit a1b2c3d",
+      "domain": "Debugging"
     },
     {
       "id": "c02",
@@ -18,7 +19,8 @@
       "fix": "Enabled CORS on the HTTP API and allowed only the deployed Amplify origin.",
       "lesson": "A browser error is often the browser doing its job, not your server failing.",
       "project": "Student API dashboard",
-      "evidence": "API Gateway CORS config"
+      "evidence": "API Gateway CORS config",
+      "domain": "APIs"
     },
     {
       "id": "c03",
@@ -28,7 +30,8 @@
       "fix": "Wrote the formula down, added boundary tests for the first and last page.",
       "lesson": "If the math is not obvious, write it on paper before writing it in code.",
       "project": "Student API dashboard",
-      "evidence": "commit b7e9f21"
+      "evidence": "commit b7e9f21",
+      "domain": "Data"
     },
     {
       "id": "c04",
@@ -38,7 +41,8 @@
       "fix": "Rethrew the error with context and rendered a visible fallback state.",
       "lesson": "A swallowed error is a future outage with better hiding.",
       "project": "Config loader for this site",
-      "evidence": "commit c44d10a"
+      "evidence": "commit c44d10a",
+      "domain": "Debugging"
     },
     {
       "id": "c05",
@@ -48,7 +52,8 @@
       "fix": "Added a content hash to asset URLs and invalidated the distribution.",
       "lesson": "Before debugging the code, confirm the new code actually arrived.",
       "project": "BUG DROP deploy pipeline",
-      "evidence": "Amplify build d91f0c2"
+      "evidence": "Amplify build d91f0c2",
+      "domain": "Deploy"
     },
     {
       "id": "c06",
@@ -58,7 +63,8 @@
       "fix": "Used optional chaining plus an explicit placeholder for missing data.",
       "lesson": "Empty, missing, and wrong are three different states. Handle all three.",
       "project": "Student API dashboard",
-      "evidence": "commit e15aa73"
+      "evidence": "commit e15aa73",
+      "domain": "Frontend"
     },
     {
       "id": "c07",
@@ -68,7 +74,8 @@
       "fix": "Stored everything in UTC and formatted only at display time.",
       "lesson": "Store time in UTC; convert at the edge. Always.",
       "project": "Deadline countdown widget",
-      "evidence": "commit f0c2b88"
+      "evidence": "commit f0c2b88",
+      "domain": "Data"
     },
     {
       "id": "c08",
@@ -78,7 +85,8 @@
       "fix": "Renamed imports to match byte-for-byte and added a build check in CI.",
       "lesson": "Your laptop is not the server. CI is the second pair of eyes.",
       "project": "GitHub Actions pipeline",
-      "evidence": "CI run #12"
+      "evidence": "CI run #12",
+      "domain": "Deploy"
     },
     {
       "id": "c09",
@@ -88,7 +96,8 @@
       "fix": "Rotated the key, moved it to a local env file, and added .gitignore before committing.",
       "lesson": "The fastest key to leak is the one you typed into the source file.",
       "project": "BUG DROP repository hygiene",
-      "evidence": ".gitignore + rotated key"
+      "evidence": ".gitignore + rotated key",
+      "domain": "Security"
     },
     {
       "id": "c10",
@@ -98,7 +107,8 @@
       "fix": "Made the nav a real toggle button, used wrapping flex, and tested on a device.",
       "lesson": "Hover is not an interaction model on touch screens.",
       "project": "BUG DROP responsive nav",
-      "evidence": "commit 0aa91fe"
+      "evidence": "commit 0aa91fe",
+      "domain": "Frontend"
     },
     {
       "id": "c11",
@@ -108,7 +118,8 @@
       "fix": "Added an optimistic animation and a timeout fallback, and kept the client UX independent.",
       "lesson": "Latency is a design problem, not only an infrastructure problem.",
       "project": "BUG DROP serverless counter",
-      "evidence": "CloudWatch logs"
+      "evidence": "CloudWatch logs",
+      "domain": "APIs"
     },
     {
       "id": "c12",
@@ -118,7 +129,8 @@
       "fix": "Replaced it with a real button, added visible focus, and announced results with aria-live.",
       "lesson": "Semantic HTML is the cheapest accessibility feature you will ever ship.",
       "project": "BUG DROP machine lever",
-      "evidence": "commit 7ac31b0"
+      "evidence": "commit 7ac31b0",
+      "domain": "Accessibility"
     }
   ],
   "secret": {
@@ -129,6 +141,7 @@
     "fix": "I wrote down what each attempt taught me, fixed one thing at a time, and shipped.",
     "lesson": "Persistence is a technical skill. The third pull is where the good stuff drops.",
     "project": "This portfolio you are reading",
-    "evidence": "You found the secret capsule"
+    "evidence": "You found the secret capsule",
+    "domain": "Mindset"
   }
 }

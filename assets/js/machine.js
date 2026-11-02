@@ -62,6 +62,8 @@
   var copyButton = document.getElementById("copy-link");
   var copyStatus = document.getElementById("copy-status");
   var collectionComplete = document.getElementById("collection-complete");
+  var profileList = document.getElementById("profile-list");
+  var profileNote = document.getElementById("profile-note");
 
   if (!machine || !lever || !reveal || !core) {
     return;
@@ -232,6 +234,57 @@
       node.appendChild(meta);
       item.appendChild(node);
       collectionList.appendChild(item);
+    });
+
+    renderProfile();
+  }
+
+  function renderProfile() {
+    if (!profileList) {
+      return;
+    }
+    var all = Array.isArray(data.capsules) ? data.capsules.slice() : [];
+    if (data.secret) {
+      all.push(data.secret);
+    }
+    var tally = core.tallyDomains(all, unlocked);
+    profileList.innerHTML = "";
+
+    if (!tally.length) {
+      if (profileNote) {
+        profileNote.hidden = false;
+      }
+      return;
+    }
+    if (profileNote) {
+      profileNote.hidden = true;
+    }
+
+    var max = tally[0].count;
+    tally.forEach(function (item) {
+      var row = document.createElement("li");
+      row.className = "profile-row";
+
+      var label = document.createElement("span");
+      label.className = "profile-label";
+      label.textContent = item.domain;
+
+      var track = document.createElement("span");
+      track.className = "profile-track";
+      track.setAttribute("aria-hidden", "true");
+      var fill = document.createElement("span");
+      fill.className = "profile-fill";
+      fill.style.width = Math.round((item.count / max) * 100) + "%";
+      track.appendChild(fill);
+
+      var count = document.createElement("span");
+      count.className = "profile-count";
+      count.textContent = item.count + (item.count === 1 ? " capsule" : " capsules");
+
+      row.appendChild(label);
+      row.appendChild(track);
+      row.appendChild(count);
+      profileList.appendChild(row);
     });
   }
 

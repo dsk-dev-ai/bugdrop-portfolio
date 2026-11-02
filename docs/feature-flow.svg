@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="360" viewBox="0 0 1100 360" role="img" aria-label="BUG DROP feature flow">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#39ff88"/>
+    </marker>
+    <linearGradient id="card" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#16324a"/>
+      <stop offset="100%" stop-color="#141b26"/>
+    </linearGradient>
+  </defs>
+  <rect width="1100" height="360" fill="#0b0f14"/>
+  <g font-family="Inter, system-ui, sans-serif" fill="#e6edf3">
+    <text x="40" y="52" font-size="26" font-weight="700">The creative feature — one pull, five beats</text>
+    <text x="40" y="82" font-size="15" fill="#9fb3c8">A bug becomes a superpower, and the third pull unlocks the secret capsule</text>
+
+    <g>
+      <rect x="40" y="130" width="170" height="110" rx="14" fill="url(#card)" stroke="#ff5f5f" stroke-width="2"/>
+      <text x="125" y="172" text-anchor="middle" font-size="16" font-weight="600">1. Incident</text>
+      <text x="125" y="198" text-anchor="middle" font-size="13" fill="#9fb3c8">what broke</text>
+    </g>
+    <g>
+      <rect x="250" y="130" width="170" height="110" rx="14" fill="url(#card)" stroke="#ffb020" stroke-width="2"/>
+      <text x="335" y="172" text-anchor="middle" font-size="16" font-weight="600">2. Root cause</text>
+      <text x="335" y="198" text-anchor="middle" font-size="13" fill="#9fb3c8">why it broke</text>
+    </g>
+    <g>
+      <rect x="460" y="130" width="170" height="110" rx="14" fill="url(#card)" stroke="#4d9bff" stroke-width="2"/>
+      <text x="545" y="172" text-anchor="middle" font-size="16" font-weight="600">3. Fix</text>
+      <text x="545" y="198" text-anchor="middle" font-size="13" fill="#9fb3c8">what changed</text>
+    </g>
+    <g>
+      <rect x="670" y="130" width="170" height="110" rx="14" fill="url(#card)" stroke="#4d9bff" stroke-width="2"/>
+      <text x="755" y="172" text-anchor="middle" font-size="16" font-weight="600">4. Lesson</text>
+      <text x="755" y="198" text-anchor="middle" font-size="13" fill="#9fb3c8">what I keep</text>
+    </g>
+    <g>
+      <rect x="880" y="130" width="180" height="110" rx="14" fill="url(#card)" stroke="#39ff88" stroke-width="2"/>
+      <text x="970" y="172" text-anchor="middle" font-size="16" font-weight="600">5. Superpower</text>
+      <text x="970" y="198" text-anchor="middle" font-size="13" fill="#9fb3c8">what I can do now</text>
+    </g>
+
+    <g stroke="#39ff88" stroke-width="2" marker-end="url(#arrow)">
+      <line x1="210" y1="185" x2="245" y2="185"/>
+      <line x1="420" y1="185" x2="455" y2="185"/>
+      <line x1="630" y1="185" x2="665" y2="185"/>
+      <line x1="840" y1="185" x2="875" y2="185"/>
+    </g>
+
+    <rect x="250" y="282" width="600" height="44" rx="12" fill="#141b26" stroke="#39ff88" stroke-width="1.5"/>
+    <text x="550" y="309" text-anchor="middle" font-size="14" fill="#9fb3c8">
+      Third pull → SECRET CAPSULE: the superpower that came from not quitting
+    </text>
+  </g>
+</svg>

@@ -5,6 +5,20 @@ This project follows [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+## [1.3.0] - 2026-11-02
+
+### Added
+- **"Under the hood" AWS section** on the live site: architecture diagram, service
+  cards (Amplify, CloudFront, API Gateway, Lambda, DynamoDB, IAM, CloudWatch,
+  Budgets), and direct links to the SAM template and deploy runbook.
+- "AWS" link in the primary navigation.
+- Cabinet completion message when all 13 capsules are unlocked.
+- Site test asserting the AWS section documents every service.
+
+### Changed
+- README and submission copy call out the on-page AWS architecture section.
+- Test suite is now **30 tests**; version bumped to `1.3.0`.
+
 ## [1.2.0] - 2026-11-02
 
 ### Added

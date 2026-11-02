@@ -70,7 +70,7 @@ test("backend capsule mirror matches the frontend dataset", () => {
 
 test("index.html contains the required sections and the visible hint", () => {
   const html = readFileSync(path.join(root, "index.html"), "utf8");
-  for (const id of ["about", "skills", "projects", "machine"]) {
+  for (const id of ["about", "skills", "projects", "aws", "machine"]) {
     assert.match(html, new RegExp('id="' + id + '"'), "missing #" + id);
   }
   assert.match(html, /PULL FOR A SUPERPOWER/, "missing visible hint text");

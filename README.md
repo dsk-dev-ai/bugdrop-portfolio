@@ -31,9 +31,11 @@ project it made possible).
    Data, Deploy, Frontend, Security, Accessibility, Mindset) as capsules open.
 7. Every postmortem has a **shareable deep link** (`#capsule=c03`) and a copy-link
    button; the cabinet can open a capsule without pulling again.
-8. The lever is a real `<button>` and works with mouse, touch, keyboard, and screen readers.
-9. No camera, no permissions, no external API keys — the feature works even if the
-   network API is down.
+8. **Export unlocked** downloads the opened postmortems as Markdown, and **Reset
+   local progress** replays the machine without touching the AWS counter.
+9. The lever is a real `<button>` and works with mouse, touch, keyboard, and screen readers.
+10. No camera, no permissions, no external API keys — the feature works even if the
+    network API is down.
 
 ## Core portfolio sections
 
@@ -75,7 +77,7 @@ bugdrop-portfolio/
 │  ├─ DEPLOY.md               # Amplify + SAM deployment runbook
 │  ├─ PULL_REQUEST_v1.0.0.md  # release PR description
 │  └─ SUBMISSION.md           # write-up ready to paste into Builder Center
-├─ tests/                     # node:test suite (32 tests)
+├─ tests/                     # node:test suite (33 tests)
 ├─ .github/
 │  ├─ workflows/ci.yml        # GitHub Actions: tests + lint + links + Lighthouse
 │  └─ PULL_REQUEST_TEMPLATE.md
@@ -224,8 +226,8 @@ It checks:
 - the backend mirror matches the frontend data
 - required sections, the visible hint, and the dialog live region exist in `index.html`
 - every local asset referenced by `index.html` exists
-- deep-link parsing, cabinet progress, domain tallies, deduplication, and capsule
-  lookup (`tests/core.test.mjs`)
+- deep-link parsing, cabinet progress, domain tallies, Markdown export,
+  deduplication, and capsule lookup (`tests/core.test.mjs`)
 - metadata, the raster social cover (1200×675), the manifest and its icons, the
   404 page, and the deploy runbook (`tests/site.test.mjs`)
 - `dayOfYear`, `dailyCapsule`, `routeOf`, and `reply` behave correctly (`tests/lib.test.mjs`)

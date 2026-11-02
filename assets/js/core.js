@@ -57,6 +57,37 @@
     return null;
   }
 
+  function capsulesToMarkdown(capsules) {
+    var list = Array.isArray(capsules)
+      ? capsules.filter(function (capsule) {
+          return capsule && capsule.id && capsule.superpower;
+        })
+      : [];
+    if (!list.length) {
+      return "";
+    }
+
+    var lines = ["# BUG DROP — unlocked capsules", ""];
+    list.forEach(function (capsule) {
+      lines.push("## " + capsule.superpower);
+      lines.push("");
+      if (capsule.domain) {
+        lines.push("**Domain:** " + capsule.domain);
+        lines.push("");
+      }
+      lines.push("- **Incident:** " + (capsule.bug || "—"));
+      lines.push("- **Root cause:** " + (capsule.cause || "—"));
+      lines.push("- **Fix:** " + (capsule.fix || "—"));
+      lines.push("- **Lesson:** " + (capsule.lesson || "—"));
+      lines.push("- **Built from it:** " + (capsule.project || "—"));
+      if (capsule.evidence) {
+        lines.push("- **Evidence:** " + capsule.evidence);
+      }
+      lines.push("");
+    });
+    return lines.join("\n").trim() + "\n";
+  }
+
   function tallyDomains(capsules, unlocked) {
     var ids = Array.isArray(unlocked) ? unlocked : [];
     var counts = {};
@@ -97,6 +128,7 @@
     capsuleHref: capsuleHref,
     addUnique: addUnique,
     findCapsule: findCapsule,
+    capsulesToMarkdown: capsulesToMarkdown,
     tallyDomains: tallyDomains,
     progress: progress
   };

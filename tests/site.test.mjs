@@ -81,6 +81,8 @@ test("capsule cabinet and share controls are wired into the page", () => {
     "profile-title",
     "profile-list",
     "profile-note",
+    "export-cabinet",
+    "reset-cabinet",
     "copy-link",
     "copy-status"
   ]) {
@@ -99,6 +101,8 @@ test("capsule cabinet and share controls are wired into the page", () => {
   assert.match(machine, /parseCapsuleHash/);
   assert.match(machine, /capsuleHref/);
   assert.match(machine, /navigator\.clipboard/);
+  assert.match(machine, /text\/markdown/);
+  assert.match(machine, /capsulesToMarkdown/);
 });
 
 test("AWS section documents the live architecture and links the source", () => {

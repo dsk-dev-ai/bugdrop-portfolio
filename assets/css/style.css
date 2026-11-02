@@ -21,11 +21,11 @@ html {
 
 body {
   margin: 0;
-  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   background: radial-gradient(circle at top, rgba(77, 155, 255, 0.12), transparent 55%), var(--bg);
   color: var(--text);
   line-height: 1.7;
-  text-rendering: optimizeLegibility;
+  text-rendering: optimizelegibility;
 }
 
 img {
@@ -543,6 +543,57 @@ main {
   text-transform: uppercase;
   letter-spacing: 0.3em;
   font-size: 0.7rem;
+}
+
+.radar-figure {
+  margin: 1.4rem 0 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.radar {
+  width: min(440px, 100%);
+  height: auto;
+}
+
+.radar-grid polygon,
+.radar-grid line {
+  fill: none;
+  stroke: var(--border);
+  stroke-width: 1;
+}
+
+.radar-shape {
+  fill: rgba(57, 255, 136, 0.16);
+  stroke: var(--accent);
+  stroke-width: 2;
+}
+
+.radar-points circle {
+  fill: var(--accent);
+}
+
+.radar-labels text {
+  fill: var(--text-sub);
+  font-size: 13px;
+  font-family: inherit;
+}
+
+.radar-figure figcaption {
+  color: var(--text-sub);
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+.daily-line {
+  margin: 0;
+  color: var(--text-sub);
+}
+
+.daily-line strong {
+  color: var(--accent);
 }
 
 .projects {

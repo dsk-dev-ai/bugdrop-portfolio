@@ -53,6 +53,8 @@ project it made possible.
 
 ## The creative feature
 
+![The bug → superpower flow](docs/feature-flow.svg)
+
 A blinking **"PULL FOR A SUPERPOWER"** badge and a bouncing arrow point at a
 physical-looking lever. Pulling it (click, tap, `Enter`, or `Space`) shakes the
 machine, drops a capsule, and opens a postmortem card.
@@ -102,8 +104,10 @@ the machine falls back to a local count, so the core interaction always works.
 ## CI/CD
 
 - **Amplify continuous deployment:** every push to `main` builds and deploys.
-- **GitHub Actions:** HTML validation, ESLint, Stylelint, broken-link check, and
-  Lighthouse CI on every push and pull request.
+- **GitHub Actions:** a Node test suite, HTML validation, ESLint, Stylelint,
+  broken-link check, and Lighthouse CI on every push and pull request.
+- **Release flow:** work lands on `release/v1.0.0`, is tested, then merged to
+  `main` with a reviewed pull request and a tagged release (`v0.1.0`, `v1.0.0`).
 
 ![GitHub Actions CI passing](docs/screenshots/05-ci.png)
 

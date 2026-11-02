@@ -5,6 +5,7 @@
     "attribute-boolean-style": "off",
     "void-style": "off",
     "wcag/h30": "off",
-    "prefer-native-element": "off"
+    "prefer-native-element": "off",
+    "svg-focusable": "off"
   }
 }

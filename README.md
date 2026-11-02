@@ -14,6 +14,8 @@ project it made possible).
 
 ## The creative feature
 
+![BUG DROP feature flow](docs/feature-flow.svg)
+
 1. A blinking **"PULL FOR A SUPERPOWER"** hint points at the lever.
 2. Pulling the lever shakes the machine and drops a capsule.
 3. The capsule opens an **incident postmortem** card with a real bug, its root cause,
@@ -43,12 +45,20 @@ bugdrop-portfolio/
 │  └─ img/og-cover.svg        # social/cover image (replace with 1200x675 PNG)
 ├─ backend/
 │  ├─ template.yaml           # AWS SAM: HTTP API + Lambda + DynamoDB
-│  └─ src/handler.mjs         # /pull /stats /daily
+│  └─ src/
+│     ├─ handler.mjs          # /pull /stats /daily
+│     ├─ lib.mjs              # pure helpers (routing, day-of-year, daily pick)
+│     └─ capsules.json        # mirror used by /daily
 ├─ docs/
 │  ├─ architecture.svg        # architecture diagram for the submission
+│  ├─ feature-flow.svg        # bug → superpower flow diagram
 │  ├─ screenshots/            # put your screenshots here
+│  ├─ PULL_REQUEST_v1.0.0.md  # release PR description
 │  └─ SUBMISSION.md           # write-up ready to paste into Builder Center
-├─ .github/workflows/ci.yml   # GitHub Actions: lint + link check + Lighthouse
+├─ tests/                     # node:test suite (16 tests)
+├─ .github/
+│  ├─ workflows/ci.yml        # GitHub Actions: tests + lint + links + Lighthouse
+│  └─ PULL_REQUEST_TEMPLATE.md
 ├─ amplify.yml                # Amplify Hosting build config
 ├─ package.json               # dev tooling only (not needed at runtime)
 └─ README.md
@@ -169,12 +179,29 @@ Run locally:
 
 ```bash
 npm run lint
+npm test
 npm run serve
 npm run links
 npm run lighthouse
 ```
 
-## 6. Submitting
+## 6. Tests
+
+The test suite runs on Node's built-in test runner (no extra dependencies):
+
+```bash
+npm test
+```
+
+It checks:
+
+- the capsule dataset schema, unique ids, and the secret capsule (`tests/capsules.test.mjs`)
+- the backend mirror matches the frontend data
+- required sections, the visible hint, and the dialog live region exist in `index.html`
+- every local asset referenced by `index.html` exists
+- `dayOfYear`, `dailyCapsule`, `routeOf`, and `reply` behave correctly (`tests/lib.test.mjs`)
+
+## 7. Submitting
 
 Fill the Builder Center **Create a project** form using `docs/SUBMISSION.md`.
 You need:
